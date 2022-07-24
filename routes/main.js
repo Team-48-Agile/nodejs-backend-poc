@@ -1,15 +1,15 @@
 const bionicReaderService = require('../services/main');
 
 module.exports = function (app) {
-    app.get("/healthcheck", function (req, res) {
+    app.get("/healthcheck", (req, res) => {
 
         console.log("App UP");
 
         res.send({'status':'up'});
     });
 
-    app.get("/bionic-reader/convert", function (req, res) {
-        const text = req.params['text'];
+    app.get("/bionic-reader/convert", (req, res) => {
+        const text = req.query['content'];
 
         console.log("Text to be converted: ", text);
 
@@ -25,8 +25,8 @@ module.exports = function (app) {
             });
     });
 
-    app.get("/bionic-reader/convert/text-vide", function (req, res) {
-        const text = 'lorem ipsum'
+    app.get("/bionic-reader/convert/text-vide", (req, res) => {
+        const text = req.query['content']
 
         console.log("Text to be converted: ", text);
 
