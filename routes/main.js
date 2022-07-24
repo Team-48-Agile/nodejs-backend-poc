@@ -24,4 +24,14 @@ module.exports = function (app) {
                 res.render(error);
             });
     });
+
+    app.get("/bionic-reader/convert/text-vide", function (req, res) {
+        const text = 'lorem ipsum'
+
+        console.log("Text to be converted: ", text);
+
+        const textWithBionic = bionicReaderService.convertTextUsingTextVide(text)
+
+        res.send(textWithBionic);
+    });
 }
