@@ -27,10 +27,12 @@ module.exports = function (app) {
 
     app.get("/bionic-reader/convert/text-vide", (req, res) => {
         const text = req.query['content']
+        const sep = req.query['sep'];
+        const fixationPoint = req.query['fixationPoint']
 
         console.log("Text to be converted: ", text);
 
-        const textWithBionic = bionicReaderService.convertTextUsingTextVide(text)
+        const textWithBionic = bionicReaderService.convertTextUsingTextVide(text, sep, fixationPoint)
 
         res.send(textWithBionic);
     });
