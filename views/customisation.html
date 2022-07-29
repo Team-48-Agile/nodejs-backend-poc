@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 
 <html>
+<!-- 
+<head>
+    <script type = "text/javascript" src="/services/functions.js"></script>
+</head> -->
 
 <body>
     <h1>Customisation Options:</h1>
+
+    <p id="test">Example Test to test on!</p>
 
     <form action = "/bionic-reader/convert/text-vide" method="GET">
         <label for="text">Text:</label>
@@ -22,7 +28,7 @@
         <input type="text" id="font" name="font"><br>
 
         <label for="fontSize">Font Size:</label><br>
-        <input type="text" id="fontSize" name="fontSize"><br>
+        <input type="number" id="fontSize" name="fontSize" min="5" max="50" value="16"><br>
 
         <label for="textColour">Text Colour:</label>
         <select id="textColour" name="textColour">
@@ -43,6 +49,28 @@
 
         <input type="submit" name="submit" value="Submit">
     </form>
+
+    <script>
+        // change font size
+        document.getElementById("fontSize").addEventListener('input', changeFontSize);
+
+        function changeFontSize(){
+            console.log("changing font size!");
+
+            var input = document.getElementById('fontSize').value;
+            document.getElementById('test').style.fontSize = input + "px";            
+        }
+
+        // change text colour
+        document.getElementById("textColour").addEventListener('input', changeTextColour);
+
+        function changeTextColour(){
+            console.log("changing text colour!");
+
+            var input = document.getElementById('textColour').value;
+            document.getElementById('test').style.color = input;
+        }
+    </script>
 </body>
 
 </html>
