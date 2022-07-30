@@ -10,4 +10,4 @@
 3. curl -v http://localhost:8084/
 
 ## Use text-vide and customisation options
-1. localhost:8084/customisation
+1. localhost:8084/input
