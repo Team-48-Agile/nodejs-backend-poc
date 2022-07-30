@@ -5,8 +5,8 @@ module.exports = function (app) {
         res.render("index.html");
     });
 
-    app.get("/customisation", (req, res) => {
-        res.render("customisation.html");
+    app.get("/input", (req, res) => {
+        res.render("input.html");
     });
 
     app.get("/healthcheck", (req, res) => {
@@ -40,17 +40,17 @@ module.exports = function (app) {
 
         // Unused
         const saccade = req.query['saccade'];
-        const font = req.query['font'];
-        const fontSize = req.query['fontSize'];
-        const textColour = req.query['textColour'];
-        const backgroundColour = req.query['backgroundColour'];
-        const letterSpacing = req.query['letterSpacing'];
-        const boldWeight = req.query['boldWeight'];
+        // const font = req.query['font'];
+        // const fontSize = req.query['fontSize'];
+        // const textColour = req.query['textColour'];
+        // const backgroundColour = req.query['backgroundColour'];
+        // const letterSpacing = req.query['letterSpacing'];
+        // const boldWeight = req.query['boldWeight'];
 
         console.log("Text to be converted with text-vide: ", text, " with a fixation of: ", fixation);
 
         const textWithBionic = bionicReaderService.convertTextUsingTextVide(text, sep, fixation)
 
-        res.render('output.ejs', {text, textWithBionic, fixation, saccade, font, fontSize, textColour, backgroundColour, letterSpacing, boldWeight});
+        res.render('customise.ejs', {text, textWithBionic, fixation, saccade, /*font, fontSize, textColour, backgroundColour, letterSpacing, boldWeight */ });
     });
 }

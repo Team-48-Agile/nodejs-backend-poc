@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html>
+
+<body>
+    <!-- Note the use of '%-' instead of '%=' here.
+    https://stackoverflow.com/questions/39335143/display-variable-content-with-html-tags-in-ejs
+    -->
+    
+    <h1>Customise your Text</h1>
+    <p id="test"><%- textWithBionic %></p>
+
+    <button id="showBtn" onclick="showOriginalText()">Show Original Text</button> 
+    <div id = "originalText" style="display:none;">
+        <p><%= text %></p>
+    </div>
+
+    <p>Fixation: <%= fixation %></p>
+    
+    <p>Saccade [Unused]: <%= saccade %></p>
+
+    <form>
+        <label for="font">Font:</label>
+        <select id="font" name="font">
+            <option value="Arial">Arial</option>
+            <option value="Verdana">Verdana</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Tahoma">Tahoma</option>
+            <option value="Trebuchet MS">Trebuchet MS</option>
+            <option value="Times New Roman" selected>Times New Roman</option>
+            <option value="Georgia">Georgia</option>
+            <option value="Garamond">Garamond</option>
+            <option value="Courier New">Courier New</option>
+            <option value="Brush Script MT">Brush Script MT</option>
+        </select><br><br>
+
+        <label for="fontSize">Font Size:</label>
+        <input type="number" id="fontSize" name="fontSize" min="5" max="50" value="16"><br><br>
+
+        <label for="textColour">Text Colour:</label>
+        <select id="textColour" name="textColour">
+            <option value="black" selected>Black</option>
+            <option value="white">White</option>
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+        </select><br><br>
+
+        <label for="backgroundColour">Background Colour:</label>
+        <select id="backgroundColour" name="backgroundColour">
+            <option value="black">Black</option>
+            <option value="white" selected>White</option>
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+        </select><br><br>
+
+        <label for="letterSpacing">Letter Spacing:</label>
+        <input type="number" id="letterSpacing" name="letterSpacing" min="-1" max="2" step="0.2" value="0"><br><br>
+
+        <label for="wordSpacing">Word Spacing:</label>
+        <input type="number" id="wordSpacing" name="wordSpacing" min="-5" max="10" step="0.5" value="0"><br><br>
+
+        <label for="lineSpacing">Line Spacing:</label>
+        <input type="number" id="lineSpacing" name="lineSpacing" min="1" max="3" step="0.2" value="1"><br><br>
+
+        <label for="fontWeight">Font Weight [Needs CSS]:</label>
+        <input type="number" id="fontWeight" name="fontWeight" min="100" max="900" step="100" value="400" disabled><br><br>
+    </form>
+
+    <script>
+        // hide/show original text [just for debugging, can remove later]
+        // hiding and showing with button click https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp 
+        // initially hiding div https://stackoverflow.com/questions/16083647/hide-text-within-html
+        // changing button text on click https://stackoverflow.com/questions/10671174/changing-button-text-onclick
+        function showOriginalText(){
+            var originalText = document.getElementById("originalText");
+            var showBtn = document.getElementById("showBtn");
+
+            if (originalText.style.display === "none"){
+                originalText.style.display = "block";
+                showBtn.innerHTML = "Hide Original Text";
+            }
+            else{
+                originalText.style.display = "none";
+                showBtn.innerHTML = "Show Original Text";
+            }
+        }
+
+        // text, fixation
+        // document.getElementById("text").addEventListener('input', convertText);
+        // document.getElementById("fixation").addEventListener('input', convertText);
+
+        // function convertText(){
+        //     const text = document.getElementById("text").value;
+        //     const fixation = document.getElementById("fixation").value;
+
+        //     //var input = convertTextUsingTextVide(text, sep, fixation);
+        //     document.getElementById('test').value = text;
+        // }
+
+        // change font
+        document.getElementById("font").addEventListener('input', changeFont);
+
+        function changeFont(){
+            console.log("Changing font!");
+
+            var input = document.getElementById('font').value;
+            document.getElementById('test').style.fontFamily = input;     
+        }
+
+        // change font size
+        document.getElementById("fontSize").addEventListener('input', changeFontSize);
+
+        function changeFontSize(){
+            console.log("Changing font size!");
+
+            var input = document.getElementById('fontSize').value;
+            document.getElementById('test').style.fontSize = input + "px";            
+        }
+
+        // change text colour
+        document.getElementById("textColour").addEventListener('input', changeTextColour);
+
+        function changeTextColour(){
+            console.log("Changing text colour!");
+
+            var input = document.getElementById('textColour').value;
+            document.getElementById('test').style.color = input;
+        }
+
+        // change background colour
+        document.getElementById("backgroundColour").addEventListener('input', changeBackgroundColour);
+
+        function changeBackgroundColour(){
+            console.log("Changing background colour!")
+
+            var input = document.getElementById('backgroundColour').value;
+            document.getElementById('test').style.backgroundColor = input;
+        }
+
+        // change letter spacing
+        document.getElementById("letterSpacing").addEventListener('input', changeLetterSpacing);
+
+        function changeLetterSpacing(){
+            console.log("Changing letter spacing!")
+
+            var input = document.getElementById('letterSpacing').value;
+            document.getElementById('test').style.letterSpacing = input + "px";
+        }        
+
+        // change word spacing
+        document.getElementById("wordSpacing").addEventListener('input', changeWordSpacing);
+
+        function changeWordSpacing(){
+            console.log("Changing word spacing!")
+
+            var input = document.getElementById('wordSpacing').value;
+            document.getElementById('test').style.wordSpacing = input + "px";
+        }
+
+        // change line spacing
+        document.getElementById("lineSpacing").addEventListener('input', changeLineSpacing);
+
+        function changeLineSpacing(){
+            console.log("Changing line spacing!")
+
+            var input = document.getElementById('lineSpacing').value;
+            document.getElementById('test').style.lineHeight = input;
+        }
+
+        // change font weight
+        document.getElementById("fontWeight").addEventListener('input', changeFontWeight);
+
+        function changeFontWeight(){
+            console.log("Changing font weight!")
+
+            var input = document.getElementById('fontWeight').value;
+            document.getElementById('test').style.fontWeight = input;
+        }        
+    </script>
+
+</body>
+
+</html>
