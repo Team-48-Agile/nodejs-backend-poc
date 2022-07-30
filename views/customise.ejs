@@ -2,13 +2,26 @@
 
 <html>
 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
 <body>
-    <!-- Note the use of '%-' instead of '%=' here.
-    https://stackoverflow.com/questions/39335143/display-variable-content-with-html-tags-in-ejs
-    -->
-    
+    <div class = "grid-container">
+
+    <div id="textArea">
+        <!-- Note the use of '%-' instead of '%=' here.
+        https://stackoverflow.com/questions/39335143/display-variable-content-with-html-tags-in-ejs
+        -->
+        <p id="test"><%- textWithBionic %></p>
+
+    </div>
+
+    <div id="customisationArea">
+        
     <h1>Customise your Text</h1>
-    <p id="test"><%- textWithBionic %></p>
 
     <button id="showBtn" onclick="showOriginalText()">Show Original Text</button> 
     <div id = "originalText" style="display:none;">
@@ -35,7 +48,8 @@
         </select><br><br>
 
         <label for="fontSize">Font Size:</label>
-        <input type="number" id="fontSize" name="fontSize" min="5" max="50" value="16"><br><br>
+        <input type="range" id="fontSize" name="fontSize" min="10" max="50" step="1" value="16"><span id="fontSizeValue">16</span><br><br>
+        <!-- <input type="number" id="fontSize" name="fontSize" min="10" max="50" value="16"><br><br> -->
 
         <label for="textColour">Text Colour:</label>
         <select id="textColour" name="textColour">
@@ -56,17 +70,22 @@
         </select><br><br>
 
         <label for="letterSpacing">Letter Spacing:</label>
-        <input type="number" id="letterSpacing" name="letterSpacing" min="-1" max="2" step="0.2" value="0"><br><br>
+        <input type="range" id="letterSpacing" name="letterSpacing" min="-1" max="2" step="0.2" value="0"><br><br>
+        <!-- <input type="number" id="letterSpacing" name="letterSpacing" min="-1" max="2" step="0.2" value="0"><br><br> -->
 
         <label for="wordSpacing">Word Spacing:</label>
-        <input type="number" id="wordSpacing" name="wordSpacing" min="-5" max="10" step="0.5" value="0"><br><br>
+        <input type="range" id="wordSpacing" name="wordSpacing" min="-5" max="10" step="0.5" value="0"><br><br>
+        <!-- <input type="number" id="wordSpacing" name="wordSpacing" min="-5" max="10" step="0.5" value="0"><br><br> -->
 
         <label for="lineSpacing">Line Spacing:</label>
-        <input type="number" id="lineSpacing" name="lineSpacing" min="1" max="3" step="0.2" value="1"><br><br>
+        <input type="range" id="lineSpacing" name="lineSpacing" min="1" max="3" step="0.2" value="1"><br><br>
+        <!-- <input type="number" id="lineSpacing" name="lineSpacing" min="1" max="3" step="0.2" value="1"><br><br> -->
 
         <label for="fontWeight">Font Weight [Needs CSS]:</label>
         <input type="number" id="fontWeight" name="fontWeight" min="100" max="900" step="100" value="400" disabled><br><br>
     </form>
+
+    </div>
 
     <script>
         // hide/show original text [just for debugging, can remove later]
@@ -114,8 +133,13 @@
 
         function changeFontSize(){
             console.log("Changing font size!");
-
+            
             var input = document.getElementById('fontSize').value;
+
+            // https://www.w3schools.com/howto/howto_js_rangeslider.asp
+            var output = document.getElementById("fontSizeValue");
+            output.innerHTML = input;
+
             document.getElementById('test').style.fontSize = input + "px";            
         }
 

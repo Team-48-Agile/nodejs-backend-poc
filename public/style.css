@@ -1,0 +1,23 @@
+/* Common CSS */
+* {
+    box-sizing: border-box;
+}
+
+body{
+    height: 100%;
+}
+
+h1{
+    color:blue;
+    background-color:lightblue;
+}
+
+#textArea { grid-area: text; }
+#customisationArea { grid-area: customisation; }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 400px auto;
+    grid-template-areas:
+        'customisation text'
+}
