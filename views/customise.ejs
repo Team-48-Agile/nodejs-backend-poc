@@ -6,86 +6,104 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <link rel="stylesheet" type="text/css" href="/style.css">
+    <title>Bionic Reading POC</title>
+
+    <script src = "/scripts.js"></script>
 </head>
 
 <body>
-    <div class = "grid-container">
+    <div class = "grid-container-customise">
+
+    <header>
+        <h1>Bionic Reading App</h1>
+    </header>
+    
+    <nav>
+        <ol>
+            <li><a href="/">Convert Text</a></li>
+            <li><a href="/about">About</a></li>
+        </ol>
+    </nav>
 
     <div id="textArea">
         <!-- Note the use of '%-' instead of '%=' here.
         https://stackoverflow.com/questions/39335143/display-variable-content-with-html-tags-in-ejs
         -->
-        <p id="test"><%- textWithBionic %></p>
-
+        <p id="bionicText"><%- textWithBionic %></p>
     </div>
+
 
     <div id="customisationArea">
-        
-    <h1>Customise your Text</h1>
 
-    <button id="showBtn" onclick="showOriginalText()">Show Original Text</button> 
-    <div id = "originalText" style="display:none;">
-        <p><%= text %></p>
+        <button id="showBtn" onclick="showOriginalText()">Show Original Text</button>
+        <div id = "originalText" style="display:none;">
+            <p><%= text %></p>
+        </div>
+
+        <form>
+            <!-- (Note: An integer value between 1 and 5. A lower fixation means more letters in a word are highlighted.) -->
+            <label for="fixation">Fixation:</label>
+            <input type="number" id="fixation" name="fixation" min="1" max="5" value=<%= fixation %>><br>
+
+            <!-- (Note: An integer value between 10 and 50 in steps of ten. A lower saccade means more words are highlighted.) -->
+            <label for="saccade">Saccade [Unused]:</label>
+            <input type="number" id="saccade" name="saccade" min="10" max="50" step="10" value=<%= saccade %>><br>
+
+            <label for="font">Font:</label>
+            <select id="font" name="font">
+                <option value="Arial">Arial</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Helvetica">Helvetica</option>
+                <option value="Tahoma">Tahoma</option>
+                <option value="Trebuchet MS">Trebuchet MS</option>
+                <option value="Times New Roman" selected>Times New Roman</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Garamond">Garamond</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Brush Script MT">Brush Script MT</option>
+            </select><br>
+
+            <label for="fontSize">Font Size: <span id="fontSizeValue"></span></label>
+            <input type="range" id="fontSize" name="fontSize" min="10" max="50" step="1" value="16"><br>
+
+            <label for="textColour">Text Colour:</label>
+            <select id="textColour" name="textColour">
+                <option value="black" selected>Black</option>
+                <option value="white">White</option>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+            </select><br>
+
+            <label for="backgroundColour">Background Colour:</label>
+            <select id="backgroundColour" name="backgroundColour">
+                <option value="black">Black</option>
+                <option value="white" selected>White</option>
+                <option value="red">Red</option>
+                <option value="green">Green</option>
+                <option value="blue">Blue</option>
+            </select><br>
+
+            <label for="letterSpacing">Letter Spacing: <span id="letterSpacingValue"></span></label>
+            <input type="range" id="letterSpacing" name="letterSpacing" min="-1" max="2" step="0.2" value="0"><br>
+
+            <label for="wordSpacing">Word Spacing: <span id="wordSpacingValue"></span></label>
+            <input type="range" id="wordSpacing" name="wordSpacing" min="-5" max="10" step="0.5" value="0"><br>
+
+            <label for="lineSpacing">Line Spacing: <span id="lineSpacingValue"></span></label>
+            <input type="range" id="lineSpacing" name="lineSpacing" min="1" max="3" step="0.2" value="1"><br>
+
+            <label for="fontWeight">Font Weight: <span id="fontWeightValue"></span></label>
+            <input type="range" id="fontWeight" name="fontWeight" min="100" max="900" step="100" value="400"><br>
+        </form>
     </div>
 
-    <p>Fixation: <%= fixation %></p>
-    
-    <p>Saccade [Unused]: <%= saccade %></p>
-
-    <form>
-        <label for="font">Font:</label>
-        <select id="font" name="font">
-            <option value="Arial">Arial</option>
-            <option value="Verdana">Verdana</option>
-            <option value="Helvetica">Helvetica</option>
-            <option value="Tahoma">Tahoma</option>
-            <option value="Trebuchet MS">Trebuchet MS</option>
-            <option value="Times New Roman" selected>Times New Roman</option>
-            <option value="Georgia">Georgia</option>
-            <option value="Garamond">Garamond</option>
-            <option value="Courier New">Courier New</option>
-            <option value="Brush Script MT">Brush Script MT</option>
-        </select><br><br>
-
-        <label for="fontSize">Font Size:</label>
-        <input type="range" id="fontSize" name="fontSize" min="10" max="50" step="1" value="16"><span id="fontSizeValue">16</span><br><br>
-        <!-- <input type="number" id="fontSize" name="fontSize" min="10" max="50" value="16"><br><br> -->
-
-        <label for="textColour">Text Colour:</label>
-        <select id="textColour" name="textColour">
-            <option value="black" selected>Black</option>
-            <option value="white">White</option>
-            <option value="red">Red</option>
-            <option value="green">Green</option>
-            <option value="blue">Blue</option>
-        </select><br><br>
-
-        <label for="backgroundColour">Background Colour:</label>
-        <select id="backgroundColour" name="backgroundColour">
-            <option value="black">Black</option>
-            <option value="white" selected>White</option>
-            <option value="red">Red</option>
-            <option value="green">Green</option>
-            <option value="blue">Blue</option>
-        </select><br><br>
-
-        <label for="letterSpacing">Letter Spacing:</label>
-        <input type="range" id="letterSpacing" name="letterSpacing" min="-1" max="2" step="0.2" value="0"><br><br>
-        <!-- <input type="number" id="letterSpacing" name="letterSpacing" min="-1" max="2" step="0.2" value="0"><br><br> -->
-
-        <label for="wordSpacing">Word Spacing:</label>
-        <input type="range" id="wordSpacing" name="wordSpacing" min="-5" max="10" step="0.5" value="0"><br><br>
-        <!-- <input type="number" id="wordSpacing" name="wordSpacing" min="-5" max="10" step="0.5" value="0"><br><br> -->
-
-        <label for="lineSpacing">Line Spacing:</label>
-        <input type="range" id="lineSpacing" name="lineSpacing" min="1" max="3" step="0.2" value="1"><br><br>
-        <!-- <input type="number" id="lineSpacing" name="lineSpacing" min="1" max="3" step="0.2" value="1"><br><br> -->
-
-        <label for="fontWeight">Font Weight [Needs CSS]:</label>
-        <input type="number" id="fontWeight" name="fontWeight" min="100" max="900" step="100" value="400" disabled><br><br>
-    </form>
-
-    </div>
+    <footer>
+        <ol>
+            <li>About BR</li>
+            <li>Our Team</li>
+        </ol>        
+    </footer>
 
     <script>
         // hide/show original text [just for debugging, can remove later]
@@ -106,17 +124,26 @@
             }
         }
 
-        // text, fixation
-        // document.getElementById("text").addEventListener('input', convertText);
-        // document.getElementById("fixation").addEventListener('input', convertText);
+        // change fixation
+        document.getElementById("fixation").addEventListener('input', convertText);
 
-        // function convertText(){
-        //     const text = document.getElementById("text").value;
-        //     const fixation = document.getElementById("fixation").value;
+        function convertText(){
+            console.log("Changing fixation!");
+        }
 
-        //     //var input = convertTextUsingTextVide(text, sep, fixation);
-        //     document.getElementById('test').value = text;
-        // }
+        // change saccade
+        document.getElementById("saccade").addEventListener('input', convertText);
+
+        function convertText(){
+            console.log("Changing saccade!");
+        }        
+
+        // set initial slider current values (so if a change is made we don't have to update in the label too)
+        document.getElementById("fontSizeValue").innerHTML = document.getElementById('fontSize').value;
+        document.getElementById("letterSpacingValue").innerHTML = document.getElementById('letterSpacing').value;
+        document.getElementById("wordSpacingValue").innerHTML = document.getElementById('wordSpacing').value;
+        document.getElementById("lineSpacingValue").innerHTML = document.getElementById('lineSpacing').value;
+        document.getElementById("fontWeightValue").innerHTML = document.getElementById('fontWeight').value;
 
         // change font
         document.getElementById("font").addEventListener('input', changeFont);
@@ -125,7 +152,7 @@
             console.log("Changing font!");
 
             var input = document.getElementById('font').value;
-            document.getElementById('test').style.fontFamily = input;     
+            document.getElementById('bionicText').style.fontFamily = input;     
         }
 
         // change font size
@@ -135,12 +162,11 @@
             console.log("Changing font size!");
             
             var input = document.getElementById('fontSize').value;
-
             // https://www.w3schools.com/howto/howto_js_rangeslider.asp
             var output = document.getElementById("fontSizeValue");
             output.innerHTML = input;
 
-            document.getElementById('test').style.fontSize = input + "px";            
+            document.getElementById('bionicText').style.fontSize = input + "px";            
         }
 
         // change text colour
@@ -150,7 +176,7 @@
             console.log("Changing text colour!");
 
             var input = document.getElementById('textColour').value;
-            document.getElementById('test').style.color = input;
+            document.getElementById('bionicText').style.color = input;
         }
 
         // change background colour
@@ -160,7 +186,7 @@
             console.log("Changing background colour!")
 
             var input = document.getElementById('backgroundColour').value;
-            document.getElementById('test').style.backgroundColor = input;
+            document.getElementById('bionicText').style.backgroundColor = input;
         }
 
         // change letter spacing
@@ -170,7 +196,10 @@
             console.log("Changing letter spacing!")
 
             var input = document.getElementById('letterSpacing').value;
-            document.getElementById('test').style.letterSpacing = input + "px";
+            var output = document.getElementById("letterSpacingValue");
+            output.innerHTML = input;      
+
+            document.getElementById('bionicText').style.letterSpacing = input + "px";
         }        
 
         // change word spacing
@@ -180,7 +209,10 @@
             console.log("Changing word spacing!")
 
             var input = document.getElementById('wordSpacing').value;
-            document.getElementById('test').style.wordSpacing = input + "px";
+            var output = document.getElementById("wordSpacingValue");
+            output.innerHTML = input;
+
+            document.getElementById('bionicText').style.wordSpacing = input + "px";
         }
 
         // change line spacing
@@ -190,7 +222,10 @@
             console.log("Changing line spacing!")
 
             var input = document.getElementById('lineSpacing').value;
-            document.getElementById('test').style.lineHeight = input;
+            var output = document.getElementById("lineSpacingValue");
+            output.innerHTML = input;
+
+            document.getElementById('bionicText').style.lineHeight = input;
         }
 
         // change font weight
@@ -200,7 +235,16 @@
             console.log("Changing font weight!")
 
             var input = document.getElementById('fontWeight').value;
-            document.getElementById('test').style.fontWeight = input;
+            var output = document.getElementById("fontWeightValue");
+            output.innerHTML = input;
+
+            // https://www.w3schools.com/jsref/met_element_getelementsbytagname.asp
+            var text = document.getElementById('bionicText')
+            var boldTags = text.getElementsByTagName("b");
+            
+            for(var i = 0; i < boldTags.length; i++){
+                boldTags[i].style.fontWeight = input;
+            }
         }        
     </script>
 

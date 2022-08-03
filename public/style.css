@@ -3,21 +3,174 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     height: 100%;
 }
 
-h1{
-    color:blue;
-    background-color:lightblue;
+p {
+    color: black;
 }
 
+h1 {
+    color: black;
+}
+
+
+
+
+/* Header CSS */
+header { grid-area: header; }
+
+header {
+    background: #088F8F;
+    color: white;    
+}
+
+
+/* Navigation CSS */
+nav { grid-area: nav; }
+
+nav {
+    background: #088F8F;
+    color: white;   
+}
+
+nav ol {
+    list-style: none; 
+    text-align: center;
+}
+
+nav li {
+    display: inline;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 8px;
+    background: lightgrey;    
+}
+
+nav li a {
+    display: inline-block;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+}
+
+
+/* Footer CSS */
+footer { grid-area: footer; }
+
+footer{
+    background: #088F8F;
+    color: white;
+}
+
+footer ol{
+    list-style: none;
+}
+
+
+/* Index.html / convert page CSS */
+#textInput { grid-area: textInput; }
+#fileUpload { grid-area: fileUpload; }
+
+.grid-container-convert {
+    display: grid;
+    grid-template-columns: auto 600px;
+    grid-template-areas:
+        'header nav'
+        'textInput textInput'
+        'fileUpload fileUpload'
+        'footer footer'
+}
+
+#textInput {
+    padding: 20px;
+}
+
+/* https://www.w3schools.com/css/tryit.asp?filename=trycss_form_responsive */
+
+#textInput input[type=submit] {
+    width: 150px;
+    padding: 10px;
+    float: left;
+    background-color: navy;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#textInput input[type=number] {
+    width: 100px;
+    padding: 5px;
+    background-color: #f2f2f2;
+    margin-bottom: 15px;
+}
+
+#textInput textarea {
+    width: 50%;
+    height: 200px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    resize: vertical;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#textInput label {
+    font-size: 20px;
+}
+
+
+/* About.html */
+#aboutInfo { grid-area: aboutInfo; }
+
+.grid-container-about {
+    display: grid;
+    grid-template-columns: auto 600px;
+    grid-template-areas:
+        'header nav'
+        'aboutInfo aboutInfo'
+        'footer footer'
+}
+
+
+/* Customise.ejs */
 #textArea { grid-area: text; }
 #customisationArea { grid-area: customisation; }
 
-.grid-container {
+.grid-container-customise {
     display: grid;
-    grid-template-columns: 400px auto;
+    grid-template-columns: auto 600px;
     grid-template-areas:
-        'customisation text'
+        'header nav'
+        'text customisation'
+        'footer footer'
+}
+
+#textArea {
+    padding: 20px;
+    height: 1000px;
+    overflow-y: scroll;
+}
+
+#customisationArea {
+    padding: 20px;
+    background: lightblue;
+}
+
+#customisationArea input[type=number], select {
+    width: 100%;
+    padding: 5px;
+    background-color: #f2f2f2;
+    margin-bottom: 15px;
+}
+
+#customisationArea input[type=range] {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#customisationArea label {
+    font-size: 20px;
 }

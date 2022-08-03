@@ -5,8 +5,8 @@ module.exports = function (app) {
         res.render("index.html");
     });
 
-    app.get("/convert", (req, res) => {
-        res.render("convert.html");
+    app.get("/about", (req, res) => {
+        res.render("about.html");
     });
 
     app.get("/healthcheck", (req, res) => {
