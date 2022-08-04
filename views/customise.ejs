@@ -42,21 +42,21 @@
 
         <form>
             <!-- (Note: An integer value between 1 and 5. A lower fixation means more letters in a word are highlighted.) -->
-            <label for="fixation">Fixation:</label>
-            <input type="number" id="fixation" name="fixation" min="1" max="5" value=<%= fixation %>><br>
+            <label for="fixation">Fixation: <span id="fixationValue"></span></label>
+            <input type="range" id="fixation" name="fixation" min="1" max="5" value=<%= fixation %>><br>
 
             <!-- (Note: An integer value between 10 and 50 in steps of ten. A lower saccade means more words are highlighted.) -->
-            <label for="saccade">Saccade [Unused]:</label>
-            <input type="number" id="saccade" name="saccade" min="10" max="50" step="10" value=<%= saccade %>><br>
+            <label for="saccade">Saccade: <span id="saccadeValue"></span></label>
+            <input type="range" id="saccade" name="saccade" min="10" max="50" step="10" value="10"><br>
 
             <label for="font">Font:</label>
             <select id="font" name="font">
-                <option value="Arial">Arial</option>
+                <option value="Arial" selected>Arial</option>
                 <option value="Verdana">Verdana</option>
                 <option value="Helvetica">Helvetica</option>
                 <option value="Tahoma">Tahoma</option>
                 <option value="Trebuchet MS">Trebuchet MS</option>
-                <option value="Times New Roman" selected>Times New Roman</option>
+                <option value="Times New Roman">Times New Roman</option>
                 <option value="Georgia">Georgia</option>
                 <option value="Garamond">Garamond</option>
                 <option value="Courier New">Courier New</option>
@@ -94,7 +94,7 @@
             <input type="range" id="lineSpacing" name="lineSpacing" min="1" max="3" step="0.2" value="1"><br>
 
             <label for="fontWeight">Font Weight: <span id="fontWeightValue"></span></label>
-            <input type="range" id="fontWeight" name="fontWeight" min="100" max="900" step="100" value="400"><br>
+            <input type="range" id="fontWeight" name="fontWeight" min="100" max="900" step="100" value="600"><br>
         </form>
     </div>
 
@@ -124,26 +124,52 @@
             }
         }
 
-        // change fixation
-        document.getElementById("fixation").addEventListener('input', convertText);
-
-        function convertText(){
-            console.log("Changing fixation!");
-        }
-
-        // change saccade
-        document.getElementById("saccade").addEventListener('input', convertText);
-
-        function convertText(){
-            console.log("Changing saccade!");
-        }        
-
         // set initial slider current values (so if a change is made we don't have to update in the label too)
+        document.getElementById("fixationValue").innerHTML = document.getElementById('fixation').value;
+        document.getElementById("saccadeValue").innerHTML = document.getElementById('saccade').value;
         document.getElementById("fontSizeValue").innerHTML = document.getElementById('fontSize').value;
         document.getElementById("letterSpacingValue").innerHTML = document.getElementById('letterSpacing').value;
         document.getElementById("wordSpacingValue").innerHTML = document.getElementById('wordSpacing').value;
         document.getElementById("lineSpacingValue").innerHTML = document.getElementById('lineSpacing').value;
         document.getElementById("fontWeightValue").innerHTML = document.getElementById('fontWeight').value;
+
+        // change fixation
+        document.getElementById("fixation").addEventListener('input', changeFixation);
+
+        function changeFixation(){
+            console.log("Changing fixation!");
+
+            var input = document.getElementById('fixation').value;
+            var output = document.getElementById("fixationValue");
+            output.innerHTML = input;
+
+        }
+
+        // change saccade
+        document.getElementById("saccade").addEventListener('input', changeSaccade);
+
+        function changeSaccade(){
+            console.log("Changing saccade!");
+
+            var input = document.getElementById('saccade').value;
+            var output = document.getElementById("saccadeValue");
+            output.innerHTML = input;
+
+            var text = document.getElementById('bionicText')
+            var boldTags = text.getElementsByTagName("b");
+            
+            for(var i = 0; i < boldTags.length; i++){
+                if(i % (input/10) == 0)
+                {
+                    // keep bold
+                    boldTags[i].style.fontWeight = 900;
+                }
+                else{
+                    // set to not bold
+                    boldTags[i].style.fontWeight = 100;
+                }
+            }    
+        }        
 
         // change font
         document.getElementById("font").addEventListener('input', changeFont);
