@@ -45,7 +45,7 @@ nav li {
     border: 1px solid black;
     border-radius: 3px;
     padding: 8px;
-    background: lightgrey;    
+    background: lightgrey;
 }
 
 nav li a {
@@ -53,6 +53,7 @@ nav li a {
     padding: 10px;
     color: black;
     text-decoration: none;
+    width: 150px;
 }
 
 
@@ -154,9 +155,42 @@ footer ol{
     overflow-y: scroll;
 }
 
+#textInput input[type=submit] {
+    width: 150px;
+    padding: 10px;
+    float: left;
+    background-color: navy;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
 #customisationArea {
     padding: 20px;
     background: lightblue;
+}
+
+/* Helped aligning the buttons on the same row => https://stackoverflow.com/questions/50615418/have-2-elements-share-same-line-with-flexbox */
+#customisationArea #btnArea {
+    text-align: center;
+    padding: 10px;
+}
+
+#customisationArea #btnArea .btn {
+    display:inline-block;
+    padding: 10px;
+}
+
+#customisationArea #btnArea .btn button {
+    width: 150px;
+    padding: 10px;
+    float: left;
+    background-color: navy;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
 }
 
 #customisationArea input[type=number], select {
