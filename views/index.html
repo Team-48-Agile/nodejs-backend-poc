@@ -42,9 +42,12 @@
     </div>
 
     <div id="fileUpload">
-        <form action = "/bionic-reader/convert/text-vide" method="GET">
-            <label for="fileUpload">Upload File:</label>
+        <form action = "/bionic-reader/convert/text-vide-file" method="POST" enctype="multipart/form-data">
+            <label for="fileUpload">Upload File:</label><br>
             <input type="file" id="fileUpload" name="fileUpload"><br>
+
+            <label for="fixation">Fixation:</label>
+            <input type="number" id="fixation" name="fixation" min="1" max="5" value="1"><br>
 
             <input type="submit" name="submit" value="Convert">
         </form>

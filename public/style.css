@@ -84,6 +84,8 @@ footer ol{
         'footer footer'
 }
 
+
+/* Text Input CSS */
 #textInput {
     padding: 20px;
 }
@@ -119,6 +121,34 @@ footer ol{
 }
 
 #textInput label {
+    font-size: 20px;
+}
+
+
+/* File Upload CSS */
+#fileUpload {
+    padding: 20px;
+}
+
+#fileUpload input[type=submit] {
+    width: 150px;
+    padding: 10px;
+    float: left;
+    background-color: navy;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+#fileUpload input[type=number] {
+    width: 100px;
+    padding: 5px;
+    background-color: #f2f2f2;
+    margin-bottom: 15px;
+}
+
+#fileUpload label {
     font-size: 20px;
 }
 
