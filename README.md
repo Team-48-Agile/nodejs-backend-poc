@@ -4,6 +4,9 @@
 1. Nodejs
 2. NPM
 
+## How to run tests
+1. npm run test
+
 ## How to run
 1. npm install
 2. node index.js
