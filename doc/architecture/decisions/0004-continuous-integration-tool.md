@@ -16,14 +16,21 @@ Evaluation of tools:
 
 - Pros
 - Cons
+1. Free Plan is too basic
 
 2. Circle CI
 - Pros
 - Cons
 
+3. Github Actions
+- Pros 
+1. Easy to setup (integrated with GH)
+
+- Cons
+
 ## Decision
 
-Tool: Travis CI
+Tool: GitHub Actions
 Why?
 
 Pipeline Steps are:
