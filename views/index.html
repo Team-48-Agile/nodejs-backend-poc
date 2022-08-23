@@ -13,18 +13,7 @@
 <body>
     <div class = "grid-container-convert">
 
-    <!-- Header -->
-    <header>
-        <h1>Bionic Reading App</h1>
-    </header>
-    
-    <!-- Navigation -->
-    <nav>
-        <ol>
-            <li><a href="/">Convert Text</a></li>
-            <li><a href="about">About</a></li>
-        </ol>
-    </nav>
+        <%- include('partials/header.html'); %>
 
     <div id="textInput">
         <form action = "/bionic-reader/convert/text-vide" method="GET">
@@ -56,12 +45,7 @@
         </form>
     </div>
 
-    <footer>
-        <ol>
-            <li>About BR</li>
-            <li>Our Team</li>
-        </ol>        
-    </footer>
+    <%- include('partials/footer.html'); %>
 </body>
 
 </html>

@@ -14,16 +14,7 @@
 <body>
     <div class = "grid-container-customise">
 
-    <header>
-        <h1>Bionic Reading App</h1>
-    </header>
-    
-    <nav>
-        <ol>
-            <li><a href="/">Convert Text</a></li>
-            <li><a href="/about">About</a></li>
-        </ol>
-    </nav>
+    <%- include('partials/header.html'); %>
 
     <div id="textArea">
         <!-- Note the use of '%-' instead of '%=' here.
@@ -113,12 +104,7 @@
         </form>
     </div>
 
-    <footer>
-        <ol>
-            <li>About BR</li>
-            <li>Our Team</li>
-        </ol>        
-    </footer>
+    <%- include('partials/footer.html'); %>
 
     <script>
         // hide/show original text [just for debugging, can remove later]
