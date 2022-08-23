@@ -27,7 +27,7 @@ const callApiAndConvert = async (text) => {
         }).catch(function (error) {
             console.error(error);
             return error;
-    });
+        });
 }
 
 module.exports = {callApiAndConvert}
