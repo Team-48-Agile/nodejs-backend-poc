@@ -5,6 +5,7 @@ const port = 8084;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json()) // for parsing application/json
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 require("./routes/main")(app);
 
