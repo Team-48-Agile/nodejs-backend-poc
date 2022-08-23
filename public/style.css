@@ -19,7 +19,7 @@ h1 {
 
 
 /* Header CSS */
-header { grid-area: header; }
+/*header { grid-area: header; }*/
 
 header {
     background: #088F8F;
@@ -28,7 +28,7 @@ header {
 
 
 /* Navigation CSS */
-nav { grid-area: nav; }
+/*nav { grid-area: nav; }*/
 
 nav {
     background: #088F8F;
@@ -58,7 +58,7 @@ nav li a {
 
 
 /* Footer CSS */
-footer { grid-area: footer; }
+/*footer { grid-area: footer; }*/
 
 footer{
     background: #088F8F;
@@ -70,8 +70,11 @@ footer ol{
 }
 
 
+
+
+
 /* Index.html / convert page CSS */
-#textInput { grid-area: textInput; }
+/*#textInput { grid-area: textInput; }
 #fileUpload { grid-area: fileUpload; }
 
 .grid-container-convert {
@@ -82,7 +85,7 @@ footer ol{
         'textInput textInput'
         'fileUpload fileUpload'
         'footer footer'
-}
+}*/
 
 
 /* Text Input CSS */
@@ -154,9 +157,9 @@ footer ol{
 
 
 /* About.html */
-#aboutInfo { grid-area: aboutInfo; }
+/*#aboutInfo { grid-area: aboutInfo; }*/
 
-.grid-container-about {
+/*.grid-container-about {
     display: grid;
     grid-template-columns: auto 600px;
     grid-template-areas:
@@ -164,10 +167,10 @@ footer ol{
         'aboutInfo aboutInfo'
         'footer footer'
 }
-
+*/
 
 /* Customise.ejs */
-#textArea { grid-area: text; }
+/*#textArea { grid-area: text; }
 #customisationArea { grid-area: customisation; }
 
 .grid-container-customise {
@@ -177,7 +180,7 @@ footer ol{
         'header nav'
         'text customisation'
         'footer footer'
-}
+}*/
 
 #textArea {
     padding: 20px;
