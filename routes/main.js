@@ -53,7 +53,6 @@ module.exports = function (app) {
 
     app.post("/bionic-reader/convert/text-vide-file", (req, res) => {
         const form = new formidable.IncomingForm();
-
         form.parse(req, function(err, fields, files){
             const filePath = files.fileUpload.filepath;
             const fileType = path.extname(files.fileUpload.originalFilename);

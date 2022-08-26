@@ -63,5 +63,33 @@ describe('GET /bionic-reader/convert/text-vide', () => {
 });
 
 describe('POST /bionic-reader/convert/text-vide-file', (req, res) => {
-    const endpoint = '/bionic-reader/convert/text-vide';
+    const endpoint = '/bionic-reader/convert/text-vide-file';
+    const filePath = 'test_files/test.txt';
+    const convertedText = "**lo**rem **ip**sum";
+
+    const requestForm = {
+        filepath: filePath
+    }
+
+    test("should parse txt file", () => {
+        // request(app)
+        //     .post('/bionic-reader/convert/text-vide-file')
+        //     // .type('form')
+        //     .send(requestForm)
+        //     .expect("Content-Type", "text/html; charset=utf-8")
+        //     .expect((res) => {
+        //         console.log(res.text);
+        //         // expect(res.text).to.contain(convertedText);
+        //     })
+        //     .expect(200, done)
+        //     .end(done => done.end());
+    });
+    test("should parse pdf file", () => {
+    });
+    test("should parse rtf file", () => {
+    });
+    test("should parse docx file", () => {
+    });
+    test("should parse html file", () => {
+    });
 })
