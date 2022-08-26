@@ -1,3 +1,15 @@
+/* Define Colour Variables */
+:root {
+  --primary-blue: #046B99;
+  --dark-blue: #1C304A;
+  --white: #ffffff;
+  --black: #000000;
+  --grey: #F4F3F3;
+  --green-highlight: #06BA63;
+}
+
+
+
 /* Common CSS */
 * {
     box-sizing: border-box;
@@ -8,22 +20,34 @@ body {
 }
 
 p {
-    color: black;
+    font-family: 'Roboto', sans-serif;
+    color: var(--black);
 }
 
 h1 {
-    color: black;
+    font-family: 'Open Sans', sans-serif;
 }
 
+h3 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+}
 
+h1.logo {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 700;
+    color: var(--primary-blue);
+
+}
 
 
 /* Header CSS */
 /*header { grid-area: header; }*/
 
 header {
-    background: #088F8F;
-    color: white;    
+    /*background: #088F8F;*/
+    /*color: white;    */
 }
 
 
@@ -31,11 +55,17 @@ header {
 /*nav { grid-area: nav; }*/
 
 nav {
-    background: #088F8F;
-    color: white;   
+/*    background: #088F8F;
+    color: white;   */
 }
 
-nav ol {
+.nav-link {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+    color: var(--black);
+}
+
+/*nav ol {
     list-style: none; 
     text-align: center;
 }
@@ -54,19 +84,21 @@ nav li a {
     color: black;
     text-decoration: none;
     width: 150px;
-}
+}*/
 
 
 /* Footer CSS */
 /*footer { grid-area: footer; }*/
 
 footer{
-    background: #088F8F;
-    color: white;
+    padding: 2em;
+    background: var(--dark-blue);
+    color: var(--white);
 }
 
-footer ol{
+footer ul{
     list-style: none;
+    padding: 0;
 }
 
 
@@ -99,7 +131,7 @@ footer ol{
     width: 150px;
     padding: 10px;
     float: left;
-    background-color: navy;
+    background-color: var(--primary-blue);
     color: white;
     border-radius: 5px;
     border: none;
@@ -136,9 +168,9 @@ footer ol{
 #fileUpload input[type=submit] {
     width: 150px;
     padding: 10px;
-    float: left;
-    background-color: navy;
-    color: white;
+    /*float: left;*/
+    background-color: var(--primary-blue);
+    color: var(--white);
     border-radius: 5px;
     border: none;
     cursor: pointer;
@@ -183,17 +215,20 @@ footer ol{
 }*/
 
 #textArea {
-    padding: 20px;
+    padding: 2em;
     height: 1000px;
     overflow-y: scroll;
+    -moz-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.25);
+    -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.25);
+    box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.25);
 }
 
 #textInput input[type=submit] {
     width: 150px;
     padding: 10px;
     float: left;
-    background-color: navy;
-    color: white;
+    background-color: var(--primary-blue);
+    color: var(--white);
     border-radius: 5px;
     border: none;
     cursor: pointer;
@@ -201,7 +236,7 @@ footer ol{
 
 #customisationArea {
     padding: 20px;
-    background: lightblue;
+    background: var(--grey);
 }
 
 /* Helped aligning the buttons on the same row => https://stackoverflow.com/questions/50615418/have-2-elements-share-same-line-with-flexbox */
@@ -219,7 +254,7 @@ footer ol{
     width: 150px;
     padding: 10px;
     float: left;
-    background-color: navy;
+    background-color: var(--primary-blue);
     color: white;
     border-radius: 5px;
     border: none;

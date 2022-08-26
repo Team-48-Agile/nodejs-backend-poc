@@ -9,6 +9,13 @@
     <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
     <!-- CUSTOM STYLES -->
     <link rel="stylesheet" type="text/css" href="/style.css">
+
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
     <title>Bionic Reading POC</title>
 
     <script src = "/scripts.js"></script>
@@ -19,6 +26,9 @@
     <%- include('partials/header.html'); %>
     
     <main role="main" class="container">
+
+        <a class="edit-link" href="/">&lt; &lt; Edit Text</a>
+
         <div class="row">
         <!-- <div class = "grid-container-customise"> -->
 
@@ -112,6 +122,10 @@
 
             </div><!-- grid-container-customise -->
         </div><!-- row -->
+
+        <p class="copyright-notice">By uploading a file or converting text you confirm that you have the necessary permission of the copyright holder. Converted text is for your own use and not for distribution.</p>
+
+
     </main><!-- container -->
 
     <%- include('partials/footer.html'); %>
