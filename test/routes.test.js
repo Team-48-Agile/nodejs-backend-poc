@@ -26,7 +26,6 @@ describe('GET /bionic-reader/convert/text-vide', () => {
     const convertedText = "**lo**rem **ip**sum";
 
     test("should parse correctly query params and return converted text", done => {
-
         request(app)
             .get(endpoint)
             .query({ text: 'lorem ipsum', sep: '**', fixation: 5, saccade: 'none' })
@@ -62,3 +61,7 @@ describe('GET /bionic-reader/convert/text-vide', () => {
             .expect(200, done);
     });
 });
+
+describe('POST /bionic-reader/convert/text-vide-file', (req, res) => {
+    const endpoint = '/bionic-reader/convert/text-vide';
+})
