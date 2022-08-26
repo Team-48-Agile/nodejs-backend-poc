@@ -1,5 +1,6 @@
 const bionicApiClient = require('../client/main.js');
 const { textVide } = require('text-vide');
+const fileReader = require('./fileReader');
 
 // Deprecated
 //TODO: Remove
@@ -21,82 +22,63 @@ const convertTextUsingTextVide = (text, sep, fixationPoints) => {
     return textWithBionic;
 }
 
-const convertFile = async (fileData, fileType, {sep: sep, fixation: fixation}) => {
+const convertFile = async (fileData, fileType, filePath, {sep: sep, fixation: fixation}) => {
 
     // TXT files
     if(fileType == '.txt'){
-        var text = fileData.toString();
+        const textFromTxt = await fileReader.readText(fileData)
 
+        console.log("Text to be converted with text-vide: ",  textFromTxt, " with a fixation of: ", fixation);
 
-        console.log("Text to be converted with text-vide: ", text, " with a fixation of: ", fixation);
-        const textWithBionic = convertTextUsingTextVide(text, sep, fixation)
+        const textWithBionic = convertTextUsingTextVide( textFromTxt, sep, fixation)
 
-        return {text, textWithBionic, fixation};
+        return {text: textFromTxt, textWithBionic, fixation};
     }
 
     // PDF files
     else if(fileType == '.pdf'){
-        const pdf = require('pdf-parse');
+        const textFromPdf = await fileReader.readPdf(fileData);
 
-        pdf(fileData).then(function(data){
-            var text = data.text;
+        console.log("Text to be converted with text-vide: ", textFromPdf, " with a fixation of: ", fixation);
 
-            console.log("Text to be converted with text-vide: ", text, " with a fixation of: ", fixation);
-            const textWithBionic = convertTextUsingTextVide(text, sep, fixation)
+        const textWithBionic = convertTextUsingTextVide(textFromPdf, sep, fixation)
 
-            return {text, textWithBionic, fixation};
-        });
+        return {text: textFromPdf, textWithBionic, fixation};
     }
 
     // DOCX files
     else if(fileType == '.docx'){
-        const mammoth = require('mammoth');
+        const textFromDocs = await fileReader.readDocx(fileData);
 
-        mammoth.extractRawText({buffer: fileData}).then(function(result){
-            var text = result.value;
+        console.log("Text to be converted with text-vide: ", textFromDocs, " with a fixation of: ", fixation);
 
-            console.log("Text to be converted with text-vide: ", text, " with a fixation of: ", fixation);
-            const textWithBionic = convertTextUsingTextVide(text, sep, fixation)
+        const textWithBionic = convertTextUsingTextVide(textFromDocs, sep, fixation)
 
-            return {text, textWithBionic, fixation};
-        });
-
+        return {text: textFromDocs, textWithBionic, fixation};
     }
 
     // RTF files
     else if(fileType == '.rtf'){
-        const rtfParser = require('rtf-parser');
+        const textFromRtf = await fileReader.readRtf(filePath)
+            .catch((err) => {
+               console.log(err);
+            });
 
-        rtfParser.stream(fs.createReadStream(filePath), function(err, doc){
-            if(err){
-                console.error(err);
-                return;
-            }
+        console.log("Text to be converted with text-vide: ", textFromRtf, " with a fixation of: ", fixation);
 
-            var text = "";
-            for(var i = 0; i < doc.content.length; i++){
-                for(var j = 0; j < doc.content[i].content.length; j++){
-                    text += doc.content[i].content[j].value;
-                }
-                text+= '\n';
-            }
+        const textWithBionic = convertTextUsingTextVide(textFromRtf, sep, fixation)
 
-            console.log("Text to be converted with text-vide: ", text, " with a fixation of: ", fixation);
-            const textWithBionic = bionicReaderService.convertTextUsingTextVide(text, sep, fixation)
-
-            return {text, textWithBionic, fixation};
-        });
+        return {text: textFromRtf, textWithBionic, fixation};
     }
 
     // HTML files
     else if(fileType == '.html'){
-        const { convert } = require('html-to-text');
 
-        var text = convert(fileData)
-        console.log(text);
+        const text = await fileReader.readHtml(fileData);
 
         console.log("Text to be converted with text-vide: ", text, " with a fixation of: ", fixation);
-        const textWithBionic = bionicReaderService.convertTextUsingTextVide(text, sep, fixation)
+
+        const textWithBionic = convertTextUsingTextVide(text, sep, fixation)
 
         return {text, textWithBionic, fixation};
     }

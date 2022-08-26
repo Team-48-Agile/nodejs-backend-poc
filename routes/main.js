@@ -1,3 +1,6 @@
+const formidable = require('formidable');
+const fs = require('fs');
+const path = require('path');
 const bionicReaderService = require('../services/main');
 
 module.exports = function (app) {
@@ -49,26 +52,17 @@ module.exports = function (app) {
     });
 
     app.post("/bionic-reader/convert/text-vide-file", (req, res) => {
-        const formidable = require('formidable');
-        const fs = require('fs');
-        const path = require('path');
-
         const form = new formidable.IncomingForm();
 
         form.parse(req, function(err, fields, files){
-            if(err){
-                console.error(err);
-                return;
-            }
-            var filePath = files.fileUpload.filepath;
-            var fileType = path.extname(files.fileUpload.originalFilename);
+            const filePath = files.fileUpload.filepath;
+            const fileType = path.extname(files.fileUpload.originalFilename);
+            const fileData = fs.readFileSync(filePath);
 
             const sep = fields.sep;
             const fixation = fields.fixation;
 
-            var fileData = fs.readFileSync(filePath);
-
-            bionicReaderService.convertFile(fileData, fileType, {sep, fixation})
+            bionicReaderService.convertFile(fileData, fileType, filePath, {sep, fixation})
                 .then(({text, textWithBionic, fixation}) => {
                     res.render('customise.ejs', {text, textWithBionic, fixation});
                 })
