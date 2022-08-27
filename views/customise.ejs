@@ -5,6 +5,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+    <!-- CUSTOM STYLES -->
     <link rel="stylesheet" type="text/css" href="/style.css">
     <title>Bionic Reading POC</title>
 
@@ -12,134 +15,127 @@
 </head>
 
 <body>
-    <div class = "grid-container-customise">
 
-    <header>
-        <h1>Bionic Reading App</h1>
-    </header>
+    <%- include('partials/header.html'); %>
     
-    <nav>
-        <ol>
-            <li><a href="/">Convert Text</a></li>
-            <li><a href="/about">About</a></li>
-        </ol>
-    </nav>
+    <main role="main" class="container">
+        <div class="row">
+        <!-- <div class = "grid-container-customise"> -->
 
-    <div id="textArea">
-        <!-- Note the use of '%-' instead of '%=' here.
-        https://stackoverflow.com/questions/39335143/display-variable-content-with-html-tags-in-ejs
-        -->
-        <p id="bionicText"><%- textWithBionic %></p>
-    </div>
-
-    <div id="customisationArea">
-
-        <div id="btnArea">
-            <div class="btn">
-                <a href="/">Back</a>
+            <div id="textArea" class="col-8">
+                <!-- Note the use of '%-' instead of '%=' here.
+                https://stackoverflow.com/questions/39335143/display-variable-content-with-html-tags-in-ejs
+                -->
+                <p id="bionicText"><%- textWithBionic %></p>
             </div>
-            <div class="btn">
-                <button id="focusModeBtn">Focus Mode</button>
-            </div>
-            <div class="btn">
-                <button id="showBtn" onclick="showOriginalText()">Show Original Text</button>
-                <div id = "originalText" style="display:none;">
-                    <p><%= text %></p>
+
+            <div id="customisationArea" class="col-4">
+
+                <div id="btnArea">
+                    <div class="btn">
+                        <a href="/">Back</a>
+                    </div>
+                    <div class="btn">
+                        <button id="focusModeBtn">Focus Mode</button>
+                    </div>
+                    <div class="btn">
+                        <button id="showBtn" onclick="showOriginalText()">Show Original Text</button>
+                        <div id = "originalText" style="display:none;">
+                            <p><%= text %></p>
+                        </div>
+                    </div>
                 </div>
+
+                <form>
+
+                    <!-- Make tooltips to explain fixation and saccade to the user. This could help => https://www.w3schools.com/css/css_tooltip.asp -->
+
+                    <!-- (Note: An integer value between 1 and 5. A lower fixation means more letters in a word are highlighted.) -->
+                    <!--<label for="fixation">Fixation: <span id="fixationValue"></span></label>
+                    <input type="range" id="fixation" name="fixation" min="1" max="5" value=<%= fixation %>><br>-->
+
+                    <!-- (Note: An integer value between 10 and 50 in steps of ten. A lower saccade means more words are highlighted.) -->
+                    <label for="saccade">Saccade: <span id="saccadeValue"></span></label>
+                    <input type="range" id="saccade" name="saccade" min="10" max="50" step="10" value="10"><br>
+
+                    <label for="font">Font:</label>
+                    <select id="font" name="font">
+                        <option value="Arial" selected>Arial</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Helvetica">Helvetica</option>
+                        <option value="Tahoma">Tahoma</option>
+                        <option value="Trebuchet MS">Trebuchet MS</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Garamond">Garamond</option>
+                        <option value="Courier New">Courier New</option>
+                        <option value="Brush Script MT">Brush Script MT</option>
+                    </select><br>
+
+                    <label for="fontSize">Font Size: <span id="fontSizeValue"></span></label>
+                    <input type="range" id="fontSize" name="fontSize" min="10" max="50" step="1" value="16"><br>
+
+                    <label for="textColour">Text Colour:</label>
+                    <select id="textColour" name="textColour">
+                        <option value="black" selected>Black</option>
+                        <option value="white">White</option>
+                        <option value="red">Red</option>
+                        <option value="green">Green</option>
+                        <option value="blue">Blue</option>
+                    </select><br>
+
+                    <label for="backgroundColour">Background Colour:</label>
+                    <select id="backgroundColour" name="backgroundColour">
+                        <option value="black">Black</option>
+                        <option value="white" selected>White</option>
+                        <option value="red">Red</option>
+                        <option value="green">Green</option>
+                        <option value="blue">Blue</option>
+                    </select><br>
+
+                    <label for="letterSpacing">Letter Spacing: <span id="letterSpacingValue"></span></label>
+                    <input type="range" id="letterSpacing" name="letterSpacing" min="-1" max="2" step="0.2" value="0"><br>
+
+                    <label for="wordSpacing">Word Spacing: <span id="wordSpacingValue"></span></label>
+                    <input type="range" id="wordSpacing" name="wordSpacing" min="-5" max="10" step="0.5" value="0"><br>
+
+                    <label for="lineSpacing">Line Spacing: <span id="lineSpacingValue"></span></label>
+                    <input type="range" id="lineSpacing" name="lineSpacing" min="1" max="3" step="0.2" value="1"><br>
+
+                    <label for="fontWeight">Font Weight: <span id="fontWeightValue"></span></label>
+                    <input type="range" id="fontWeight" name="fontWeight" min="100" max="900" step="100" value="600"><br>
+                </form>
+                
+                <form action = "/download" method="POST">
+
+                    <!-- <p><%= textWithBionic %></p> -->
+                    <textarea id="bionicText" name="bionicText"><%= textWithBionic %></textarea>
+
+                    <label for="filename">Filename:</label>
+                    <input type="text" id="filename" name="filename" value="converted_text"><br>
+
+                    <label for="fileType">File Type:</label>
+                    <select id="fileType" name="fileType">
+                        <option value="txt" selected>.txt</option>
+                        <option value="pdf">.pdf</option>
+                        <option value="docx">.docx</option>
+                        <option value="rtf">.rtf</option>
+                        <option value="html">.html</option>
+                    </select><br>
+
+                    <div id="btnArea">
+                        <div class="btn">
+                            <input type="submit" name="submit" value="Downloads">
+                        </div>
+                    </div>
+                </form>       
             </div>
-        </div>
 
-        <form>
+            </div><!-- grid-container-customise -->
+        </div><!-- row -->
+    </main><!-- container -->
 
-            <!-- Make tooltips to explain fixation and saccade to the user. This could help => https://www.w3schools.com/css/css_tooltip.asp -->
-
-            <!-- (Note: An integer value between 1 and 5. A lower fixation means more letters in a word are highlighted.) -->
-            <!--<label for="fixation">Fixation: <span id="fixationValue"></span></label>
-            <input type="range" id="fixation" name="fixation" min="1" max="5" value=<%= fixation %>><br>-->
-
-            <!-- (Note: An integer value between 10 and 50 in steps of ten. A lower saccade means more words are highlighted.) -->
-            <label for="saccade">Saccade: <span id="saccadeValue"></span></label>
-            <input type="range" id="saccade" name="saccade" min="10" max="50" step="10" value="10"><br>
-
-            <label for="font">Font:</label>
-            <select id="font" name="font">
-                <option value="Arial" selected>Arial</option>
-                <option value="Verdana">Verdana</option>
-                <option value="Helvetica">Helvetica</option>
-                <option value="Tahoma">Tahoma</option>
-                <option value="Trebuchet MS">Trebuchet MS</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Georgia">Georgia</option>
-                <option value="Garamond">Garamond</option>
-                <option value="Courier New">Courier New</option>
-                <option value="Brush Script MT">Brush Script MT</option>
-            </select><br>
-
-            <label for="fontSize">Font Size: <span id="fontSizeValue"></span></label>
-            <input type="range" id="fontSize" name="fontSize" min="10" max="50" step="1" value="16"><br>
-
-            <label for="textColour">Text Colour:</label>
-            <select id="textColour" name="textColour">
-                <option value="black" selected>Black</option>
-                <option value="white">White</option>
-                <option value="red">Red</option>
-                <option value="green">Green</option>
-                <option value="blue">Blue</option>
-            </select><br>
-
-            <label for="backgroundColour">Background Colour:</label>
-            <select id="backgroundColour" name="backgroundColour">
-                <option value="black">Black</option>
-                <option value="white" selected>White</option>
-                <option value="red">Red</option>
-                <option value="green">Green</option>
-                <option value="blue">Blue</option>
-            </select><br>
-
-            <label for="letterSpacing">Letter Spacing: <span id="letterSpacingValue"></span></label>
-            <input type="range" id="letterSpacing" name="letterSpacing" min="-1" max="2" step="0.2" value="0"><br>
-
-            <label for="wordSpacing">Word Spacing: <span id="wordSpacingValue"></span></label>
-            <input type="range" id="wordSpacing" name="wordSpacing" min="-5" max="10" step="0.5" value="0"><br>
-
-            <label for="lineSpacing">Line Spacing: <span id="lineSpacingValue"></span></label>
-            <input type="range" id="lineSpacing" name="lineSpacing" min="1" max="3" step="0.2" value="1"><br>
-
-            <label for="fontWeight">Font Weight: <span id="fontWeightValue"></span></label>
-            <input type="range" id="fontWeight" name="fontWeight" min="100" max="900" step="100" value="600"><br>
-        </form>
-
-        <form action = "/download" method="POST">
-
-            <!-- <p><%= textWithBionic %></p> -->
-            <textarea id="bionicText" name="bionicText"><%= textWithBionic %></textarea>
-
-            <label for="filename">Filename:</label>
-            <input type="text" id="filename" name="filename" value="converted_text"><br>
-
-            <label for="fileType">File Type:</label>
-            <select id="fileType" name="fileType">
-                <option value="txt" selected>.txt</option>
-                <option value="pdf">.pdf</option>
-                <option value="docx">.docx</option>
-                <option value="rtf">.rtf</option>
-                <option value="html">.html</option>
-            </select><br>
-
-            <div id="btnArea">
-                <div class="btn">
-                    <input type="submit" name="submit" value="Downloads">
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <footer>
-        <ol>
-            <li>About BR</li>
-            <li>Our Team</li>
-        </ol>        
-    </footer>
+    <%- include('partials/footer.html'); %>
 
     <script>
         // hide/show original text [just for debugging, can remove later]
