@@ -51,10 +51,10 @@ const convertFile = async (fileData, fileType, filePath, {sep: sep, fixation: fi
             return {text: textFromRtf, textWithBionic, fixation};
 
         case '.html':
-            const text = await fileReader.readHtml(fileData);
-            console.log("Text to be converted with text-vide: ", text, " with a fixation of: ", fixation);
-            textWithBionic = convertTextUsingTextVide(text, sep, fixation)
-            return {text, textWithBionic, fixation};
+            const textFromHtml = await fileReader.readHtml(fileData);
+            console.log("Text to be converted with text-vide: ", textFromHtml, " with a fixation of: ", fixation);
+            textWithBionic = convertTextUsingTextVide(textFromHtml, sep, fixation)
+            return {text: textFromHtml, textWithBionic, fixation};
 
         default:
             throw new Error('Error converting file: ' + fileType + ' not supported');

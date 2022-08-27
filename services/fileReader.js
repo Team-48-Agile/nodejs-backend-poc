@@ -12,21 +12,23 @@ const readDocx = async (fileData) => mammoth.extractRawText({buffer: fileData})
     .then(result => result.value);
 
 const readRtf = async (filePath) => {
-    console.log('file path:', filePath)
+    var textFromRtf = "";
 
-    return rtfParser.stream(fs.createReadStream(filePath), (err, doc) => {
-        let textFromRtf = "";
+    rtfParser.stream(fs.createReadStream(filePath), (err, doc) => {
 
         for(let i = 0; i < doc.content.length; i++){
             for(let j = 0; j < doc.content[i].content.length; j++){
                 textFromRtf += doc.content[i].content[j].value;
+                // console.log(textFromRtf)
             }
             textFromRtf += '\n';
         }
-
-        return textFromRtf;
+        return textFromRtf
     });
+
+    return textFromRtf;
 }
+
 
 const readHtml = async (fileData) => convert(fileData);
 
