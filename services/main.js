@@ -1,6 +1,6 @@
 const bionicApiClient = require('../client/main.js');
 const { textVide } = require('text-vide');
-const fileReader = require('./fileReader');
+const fileAdapter = require('./fileAdapter');
 
 // Deprecated
 //TODO: Remove
@@ -23,43 +23,13 @@ const convertTextUsingTextVide = (text, sep, fixationPoints) => {
 }
 
 const convertFile = async (fileData, fileType, filePath, {sep: sep, fixation: fixation}) => {
-    let textWithBionic;
 
-    switch (fileType) {
-        case '.txt':
-            const textFromTxt = await fileReader.readText(fileData)
-            console.log("Text to be converted with text-vide: ",  textFromTxt, " with a fixation of: ", fixation);
-            textWithBionic = convertTextUsingTextVide( textFromTxt, sep, fixation)
-            return {text: textFromTxt, textWithBionic, fixation};
+    const text = await fileAdapter.readFromExternalInput(fileData, fileType, filePath)
+    console.log("Text to be converted with text-vide: ",  text, " with a fixation of: ", fixation);
 
-        case '.pdf':
-            const textFromPdf = await fileReader.readPdf(fileData);
-            console.log("Text to be converted with text-vide: ", textFromPdf, " with a fixation of: ", fixation);
-            textWithBionic = convertTextUsingTextVide(textFromPdf, sep, fixation)
-            return {text: textFromPdf, textWithBionic, fixation};
+    const textWithBionic = convertTextUsingTextVide( text, sep, fixation)
 
-        case '.docx':
-            const textFromDocs = await fileReader.readDocx(fileData);
-            console.log("Text to be converted with text-vide: ", textFromDocs, " with a fixation of: ", fixation);
-            textWithBionic = convertTextUsingTextVide(textFromDocs, sep, fixation)
-            return {text: textFromDocs, textWithBionic, fixation};
-
-        case '.rtf':
-            const textFromRtf = await fileReader.readRtf(filePath);
-            console.log("Text to be converted with text-vide: ", textFromRtf, " with a fixation of: ", fixation);
-            textWithBionic = convertTextUsingTextVide(textFromRtf, sep, fixation)
-            return {text: textFromRtf, textWithBionic, fixation};
-
-        case '.html':
-            const textFromHtml = await fileReader.readHtml(fileData);
-            console.log("Text to be converted with text-vide: ", textFromHtml, " with a fixation of: ", fixation);
-            textWithBionic = convertTextUsingTextVide(textFromHtml, sep, fixation)
-            return {text: textFromHtml, textWithBionic, fixation};
-
-        default:
-            throw new Error('Error converting file: ' + fileType + ' not supported');
-    }
-
+    return {text, textWithBionic, fixation};
 }
 
 module.exports = {convertText, convertTextUsingTextVide, convertFile};
