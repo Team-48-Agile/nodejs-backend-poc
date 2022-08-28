@@ -25,6 +25,7 @@ const convertTextUsingTextVide = (text, sep, fixationPoints) => {
 const convertFile = async (fileData, fileType, filePath, {sep: sep, fixation: fixation}) => {
 
     const text = await fileAdapter.readFromExternalInput(fileData, fileType, filePath)
+
     console.log("Text to be converted with text-vide: ",  text, " with a fixation of: ", fixation);
 
     const textWithBionic = convertTextUsingTextVide( text, sep, fixation)
