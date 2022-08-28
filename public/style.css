@@ -215,7 +215,7 @@ footer ul{
 }*/
 
 #textArea {
-    padding: 2em;
+    padding: 4em;
     margin: 1em;
     height: 1000px;
     overflow-y: scroll;
@@ -223,6 +223,7 @@ footer ul{
     -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.25);
     box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.25);
     position: relative;
+    transition: box-shadow 0.2s ease-in-out;
 }
 
 .focused {
@@ -245,6 +246,7 @@ footer ul{
 #customisationArea {
     padding: 20px;
     background: var(--grey);
+    border-radius: 4px;
 }
 
 /* Helped aligning the buttons on the same row => https://stackoverflow.com/questions/50615418/have-2-elements-share-same-line-with-flexbox */
@@ -273,7 +275,6 @@ footer ul{
     border: none;
     cursor: pointer;
     font-size: medium;
-    font-family: 'Times New Roman', Times, serif;
 }
 
 #customisationArea #btnArea .btn a {
@@ -287,7 +288,6 @@ footer ul{
     cursor: pointer;
     text-decoration: none;
     font-size: medium;
-    font-family: 'Times New Roman', Times, serif;
 }
 
 #customisationArea input[type=number], select {
@@ -304,4 +304,8 @@ footer ul{
 
 #customisationArea label {
     font-size: 20px;
+}
+
+.copyright-notice {
+    padding: 2em;
 }
