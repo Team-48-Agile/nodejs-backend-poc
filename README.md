@@ -8,11 +8,12 @@
 
 ## How to run tests
 1. npm run test
+2. Run with coverage: npm run test-coverage
 
 ## How to run
 1. npm install
-2. node index.js
-3. curl -v http://localhost:8084/healthcheck
+2. npm run start
+3. curl -v http://localhost:5000/healthcheck
 
 ## Endpoints
 

@@ -1,6 +1,9 @@
 const bionicApiClient = require('../client/main.js');
 const { textVide } = require('text-vide');
+const fileAdapter = require('./fileAdapter');
 
+// Deprecated
+//TODO: Remove
 const convertText = async (text) => {
     return bionicApiClient.callApiAndConvert(text)
         .then(textWithBionic => {
@@ -19,4 +22,15 @@ const convertTextUsingTextVide = (text, sep, fixationPoints) => {
     return textWithBionic;
 }
 
-module.exports = {convertText, convertTextUsingTextVide};
+const convertFile = async (fileData, fileType, filePath, {sep: sep, fixation: fixation}) => {
+
+    const text = await fileAdapter.readFromExternalInput(fileData, fileType, filePath)
+
+    console.log("Text to be converted with text-vide: ",  text, " with a fixation of: ", fixation);
+
+    const textWithBionic = convertTextUsingTextVide( text, sep, fixation)
+
+    return {text, textWithBionic, fixation};
+}
+
+module.exports = {convertText, convertTextUsingTextVide, convertFile};
