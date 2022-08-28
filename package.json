@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --verbose",
+    "test": "jest --verbose",
+    "test-coverage": "jest --coverage --verbose",
     "start": "node index.js"
   },
   "author": "",
