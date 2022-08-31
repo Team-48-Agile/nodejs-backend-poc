@@ -86,7 +86,7 @@
                     <label for="fontSize">Font Size: <span id="fontSizeValue"></span></label>
                     <input type="range" id="fontSize" name="fontSize" min="10" max="50" step="1" value="16"><br>
 
-                    <label for="textColour">Text Colour:</label>
+                    <!-- <label for="textColour">Text Colour:</label>
                     <select id="textColour" name="textColour">
                         <option value="black" selected>Black</option>
                         <option value="white">White</option>
@@ -102,6 +102,17 @@
                         <option value="red">Red</option>
                         <option value="green">Green</option>
                         <option value="blue">Blue</option>
+                    </select><br>
+
+                    -->
+
+                    <label for="colourScheme">Colour Scheme:</label>
+                    <select id="colourScheme" name="colourScheme">
+                        <option value="standard" selected>Standard</option>
+                        <option value="sepia">Sepia</option>
+                        <option value="rose">Rose</option>
+                        <option value="mint">Mint</option>
+                        <option value="dark">Dark</option>
                     </select><br>
 
                     <label for="letterSpacing">Letter Spacing: <span id="letterSpacingValue"></span></label>
@@ -251,23 +262,69 @@
         }
 
         // change text colour
-        document.getElementById("textColour").addEventListener('input', changeTextColour);
+        // document.getElementById("textColour").addEventListener('input', changeTextColour);
 
-        function changeTextColour(){
-            console.log("Changing text colour!");
+        // function changeTextColour(){
+        //     console.log("Changing text colour!");
 
-            var input = document.getElementById('textColour').value;
-            document.getElementById('bionicText').style.color = input;
-        }
+        //     var input = document.getElementById('textColour').value;
+        //     document.getElementById('bionicText').style.color = input;
+        // }
 
         // change background colour
-        document.getElementById("backgroundColour").addEventListener('input', changeBackgroundColour);
+        // document.getElementById("backgroundColour").addEventListener('input', changeBackgroundColour);
 
-        function changeBackgroundColour(){
-            console.log("Changing background colour!")
+        // function changeBackgroundColour(){
+        //     console.log("Changing background colour!")
 
-            var input = document.getElementById('backgroundColour').value;
-            document.getElementById('bionicText').style.backgroundColor = input;
+        //     var input = document.getElementById('backgroundColour').value;
+        //     document.getElementById('bionicText').style.backgroundColor = input;
+        // }
+
+        // change colour scheme
+        document.getElementById("colourScheme").addEventListener('input', changeColourScheme);
+
+        function changeColourScheme(){
+            var input = document.getElementById('colourScheme').value;
+
+            var bioonicTextColour;
+            var bionicTextBG;
+
+            switch(input){
+                case "standard" :
+                bionicTextColour = '#000000';
+                bionicTextBG = '#ffffff';
+                break;
+
+                case "sepia" :
+                bionicTextColour = '#002a2a';
+                bionicTextBG = '#f1eede';
+                break;
+
+                case "mint" :
+                bionicTextColour = '#007a7c';
+                bionicTextBG = '#d1ffff';
+                break;
+
+                case "rose" :
+                bionicTextColour = '#2a5547';
+                bionicTextBG = '#ffd5d5';
+                break;
+
+                case "dark" :
+                bionicTextColour = '#e0ffff';
+                bionicTextBG = '#131313';
+                break;
+
+                default:
+                bionicTextColour = '#000000';
+                bionicTextBG = '#ffffff';
+
+            }
+
+            document.getElementById('bionicText').style.color = bionicTextColour;
+            document.getElementById('bionicText').style.backgroundColor = bionicTextBG;
+
         }
 
         // change letter spacing
