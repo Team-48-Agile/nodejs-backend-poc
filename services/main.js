@@ -35,12 +35,13 @@ const convertFile = async (fileData, fileType, filePath, {sep: sep, fixation: fi
 }
 
 const downloadFile = async (bionicText, filename, fileType) => {
-    console.log('File to be downloaded: '+bionicText);
-
     const file = filename + Math.random() + "." + fileType;
 
-    fileAdapter.writeToFileSystem(file, fileType, bionicText)
+    const filePath = fileAdapter.writeToFileSystem(file, fileType, bionicText)
 
+    console.log('File path to be downloaded: '+filePath);
+
+    return filePath;
 }
 
 module.exports = {convertText, convertTextUsingTextVide, convertFile, downloadFile};

@@ -1,6 +1,7 @@
 const formidable = require('formidable');
 const fs = require('fs');
 const path = require('path');
+const mime = require('mime');
 const bionicReaderService = require('../services/main');
 
 module.exports = function (app) {
@@ -78,7 +79,21 @@ module.exports = function (app) {
         const fileType = req.body['fileType'];
 
         bionicReaderService.downloadFile(bionicText, filename, fileType)
-            .then(() => console.log('File written succesfully'))
+            .then((file) => {
+                console.log('CONTROLLER -> FILE DO BE DOWNLOADED: '+ file)
+
+                let filename = path.basename(file);
+                let mimetype = mime.lookup(file);
+
+                res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                res.setHeader('Content-type', mimetype);
+
+                let filestream = fs.createReadStream(file);
+
+                filestream.pipe(res);
+
+                // res.download(file);
+            })
             .catch((err) => console.log('Error: '+ err));
     });    
 }

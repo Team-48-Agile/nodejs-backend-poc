@@ -2,18 +2,20 @@ const fs = require('fs');
 const HTMLtoDOCX = require('html-to-docx');
 const htmlToRtf = require('html-to-rtf');
 const html_to_pdf = require('html-pdf-node');
+const path = require('path');
 
 const writeTxt = (fileName, fileData) => {
-
     fs.writeFile(fileName, fileData, (err) => {
         if(err){
-            console.error(err);
+            console.error('Error here:'+err);
             return;
         }
 
         console.log("File written succesfully: ", fileName);
         console.log("File data: ", fileData);
     });
+
+    return path.resolve(fileName)
 }
 
 const writeDocx = async (fileName, fileData) => {
@@ -31,6 +33,7 @@ const writeDocx = async (fileName, fileData) => {
         console.log("File written succesfully: ", fileName);
         console.log("File data: ", fileData);
     });
+    return path.resolve(fileName)
 }
 
 const writeRtf = (fileName, fileData) => {
@@ -41,6 +44,8 @@ const writeRtf = (fileName, fileData) => {
 
     console.log("File written succesfully: ", fileName);
     console.log("File data: ", fileData);
+
+    return path.resolve(fileName);
 }
 
 const writePdf = (fileName, fileData) => {
@@ -51,7 +56,7 @@ const writePdf = (fileName, fileData) => {
     let options = {format: 'A4'};
     let file = { content: test};
 
-    html_to_pdf.generatePdf(file, options)
+    return html_to_pdf.generatePdf(file, options)
         .then(pdfBuffer => { fs.writeFile(fileName, pdfBuffer, (err) => {
             if(err){
                 console.error(err);
@@ -61,7 +66,9 @@ const writePdf = (fileName, fileData) => {
             console.log("File written succesfully: ", fileName);
             console.log("File data: ", fileData);
         });
-    })
+
+            return path.resolve(fileName);
+    });
 }
 
 module.exports = {writeTxt, writeDocx, writeRtf, writePdf};

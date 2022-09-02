@@ -26,26 +26,21 @@ const readFromExternalInput = async (fileData, fileType, filePath) => {
 const writeToFileSystem = (fileName, fileType, fileData) => {
     switch (fileType) {
         case 'txt':
-            fileWriter.writeTxt(fileName, fileData);
-            break;
+            return fileWriter.writeTxt(fileName, fileData);
 
         case 'pdf':
-            fileWriter.writePdf(fileName, fileData)
-            break;
+            return fileWriter.writePdf(fileName, fileData)
 
         case 'docx':
-            fileWriter.writeDocx(fileName, fileData)
-                .then(() => { console.log('success') })
+            return fileWriter.writeDocx(fileName, fileData)
+                .then(() => { return fileName })
                 .catch((err) => console.log(err))
-            break;
 
         case 'rtf':
-            fileWriter.writeRtf(fileName, fileData);
-            break;
+            return fileWriter.writeRtf(fileName, fileData);
 
             case 'html':
-            fileWriter.writeTxt(fileName, fileData);
-            break;
+            return fileWriter.writeTxt(fileName, fileData);
 
         default:
             throw new Error('Error creating  file: '+fileName);
