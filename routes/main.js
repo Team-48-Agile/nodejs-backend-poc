@@ -1,6 +1,7 @@
 const formidable = require('formidable');
 const fs = require('fs');
 const path = require('path');
+const mime = require('mime');
 const bionicReaderService = require('../services/main');
 
 module.exports = function (app) {
@@ -53,11 +54,10 @@ module.exports = function (app) {
 
     app.post("/bionic-reader/convert/text-vide-file", (req, res) => {
         const form = new formidable.IncomingForm();
-        form.parse(req, function(err, fields, files){
+        form.parse(req, (err, fields, files) => {
             const filePath = files.fileUpload.filepath;
             const fileType = path.extname(files.fileUpload.originalFilename);
             const fileData = fs.readFileSync(filePath);
-
             const sep = fields.sep;
             const fixation = fields.fixation;
 
@@ -71,81 +71,24 @@ module.exports = function (app) {
         });
     });
     
-    app.post("/download", (req, res) => {
+    app.post("/download", async (req, res) => {
 
         const bionicText = req.body['bionicText'];
         const filename = req.body['filename'];
-        const fileType = req.body['fileType'];     
-        
-        console.log(bionicText);
+        const fileType = req.body['fileType'];
 
-        const t = filename + "." + fileType;
-        
+        bionicReaderService.downloadFile(bionicText, filename, fileType)
+            .then((file) => {
+                let filename = path.basename(file);
+                let mimetype = mime.lookup(file);
 
-        const fs = require('fs');
+                res.setHeader('Content-disposition', 'attachment; filename=' + filename);
+                res.setHeader('Content-type', mimetype);
 
-        fs.open(t, 'w', function(err, file){
-            if(err){
-                console.error(err);
-                return;
-            }
-            console.log("file created");
-        })
+                let filestream = fs.createReadStream(file);
 
-        console.log(fileType);
-
-        if(fileType == "txt" || fileType == "html"){
-            
-            fs.writeFile(t, bionicText, function(err){
-                if(err){
-                    console.error(err);
-                    return;
-                }
-                console.log("text written");
-            });
-        }
-        if(fileType == "docx"){
-            const HTMLtoDOCX = require('html-to-docx');
-            
-            const test = "<p>" + bionicText + "</p>";
-            console.log(test);
-
-            (async() => {
-                const fileBuffer = await HTMLtoDOCX(test);
-
-                fs.writeFile(t, fileBuffer, function(err){
-                    if(err){
-                        console.error(err);
-                        return;
-                    }
-                    console.log("text written");
-                });
-            })();
-        }
-        if(fileType == "pdf"){
-            const html_to_pdf = require('html-pdf-node');
-            
-            const test = "<p>" + bionicText + "</p>";
-            console.log(test);
-
-            options = {format: 'A4'};
-            file = { content: test};
-
-            html_to_pdf.generatePdf(file, options).then(pdfBuffer => {
-                fs.writeFile(t, pdfBuffer, function(err){
-                    if(err){
-                        console.error(err);
-                        return;
-                    }
-                    console.log("text written");
-                });
+                filestream.pipe(res);
             })
-        } 
-        if(fileType == "rtf"){
-            const htmlToRtf = require('html-to-rtf');
-            const test = "<p>" + bionicText + "</p>";
-            htmlToRtf.saveRtfInFile(t, htmlToRtf.convertHtmlToRtf(test));
-        }      
-
+            .catch((err) => console.log('Error: '+ err));
     });    
 }

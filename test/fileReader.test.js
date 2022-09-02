@@ -3,7 +3,7 @@ const expect = chai.expect;
 chai.use(require('chai-string'));
 const fs = require('fs');
 const path = require( 'path' );
-const fileReader = require('../services/fileReader')
+const fileReader = require('../adapter/fileReader')
 
 describe('fileReader.readRtf()', () => { //TODO: Remove Skip
     it.skip('should receive file path and return text as string', async () => {

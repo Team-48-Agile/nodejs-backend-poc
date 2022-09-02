@@ -1,6 +1,7 @@
 const bionicApiClient = require('../client/main.js');
 const { textVide } = require('text-vide');
-const fileAdapter = require('./fileAdapter');
+const fileAdapter = require('../adapter/fileAdapter');
+const fs = require('fs');
 
 // Deprecated
 //TODO: Remove
@@ -23,7 +24,6 @@ const convertTextUsingTextVide = (text, sep, fixationPoints) => {
 }
 
 const convertFile = async (fileData, fileType, filePath, {sep: sep, fixation: fixation}) => {
-
     const text = await fileAdapter.readFromExternalInput(fileData, fileType, filePath)
 
     console.log("Text to be converted with text-vide: ",  text, " with a fixation of: ", fixation);
@@ -33,4 +33,14 @@ const convertFile = async (fileData, fileType, filePath, {sep: sep, fixation: fi
     return {text, textWithBionic, fixation};
 }
 
-module.exports = {convertText, convertTextUsingTextVide, convertFile};
+const downloadFile = async (bionicText, filename, fileType) => {
+    const file = filename + Math.random() + "." + fileType;
+
+    const filePath = fileAdapter.writeToFileSystem(file, fileType, bionicText)
+
+    console.log('File path to be downloaded: '+filePath);
+
+    return filePath;
+}
+
+module.exports = {convertText, convertTextUsingTextVide, convertFile, downloadFile};
