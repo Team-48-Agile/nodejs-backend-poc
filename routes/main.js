@@ -58,7 +58,6 @@ module.exports = function (app) {
             const filePath = files.fileUpload.filepath;
             const fileType = path.extname(files.fileUpload.originalFilename);
             const fileData = fs.readFileSync(filePath);
-
             const sep = fields.sep;
             const fixation = fields.fixation;
 
@@ -80,8 +79,6 @@ module.exports = function (app) {
 
         bionicReaderService.downloadFile(bionicText, filename, fileType)
             .then((file) => {
-                console.log('CONTROLLER -> FILE DO BE DOWNLOADED: '+ file)
-
                 let filename = path.basename(file);
                 let mimetype = mime.lookup(file);
 
@@ -91,8 +88,6 @@ module.exports = function (app) {
                 let filestream = fs.createReadStream(file);
 
                 filestream.pipe(res);
-
-                // res.download(file);
             })
             .catch((err) => console.log('Error: '+ err));
     });    
