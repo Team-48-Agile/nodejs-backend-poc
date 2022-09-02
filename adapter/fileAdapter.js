@@ -14,12 +14,7 @@ const readFromExternalInput = async (fileData, fileType, filePath) => {
             return await fileReader.readDocx(fileData);
 
         case '.rtf':
-            await fileReader.readAndCacheRtfContent(filePath);
-
-            const text = await _getCachedRtf();
-            await _cleanCache();
-
-            return text;
+            return await fileReader.readAndCacheRtfContent(filePath);
 
         case '.html':
             return await fileReader.readHtml(fileData);
@@ -52,14 +47,5 @@ const writeToFileSystem = (fileName, fileType, fileData) => {
             throw new Error('Error creating  file: '+fileName);
     }
 }
-
-const _getCachedRtf = async () => {
-    const text = fs.readFileSync(fileReader.CACHED_RTF_LOCATION, 'utf8');
-    console.log('CACHE LOCATION: ', fileReader.CACHED_RTF_LOCATION);
-    console.log('GET CACHE: ', text);
-
-    return text;
-};
-const _cleanCache = async () => fs.unlinkSync(fileReader.CACHED_RTF_LOCATION);
 
 module.exports = {readFromExternalInput, writeToFileSystem};

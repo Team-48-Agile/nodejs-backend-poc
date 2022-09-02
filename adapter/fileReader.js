@@ -4,8 +4,7 @@ const mammoth = require('mammoth');
 const rtfParser = require('rtf-parser');
 const fileWriter = require('./fileWriter');
 const { convert } = require('html-to-text');
-
-const CACHED_RTF_LOCATION = __dirname + '/' + 'cached_rtf.txt';
+const fileSystemCache = require('./fileSystemCache');
 
 const readText = async (fileData) => fileData.toString();
 
@@ -15,7 +14,6 @@ const readDocx = async (fileData) => mammoth.extractRawText({buffer: fileData})
     .then(result => result.value);
 
 const readAndCacheRtfContent = async (filePath) => {
-    // var textFromRtf = "";
 
     // Problem here: void method, variable textFromRtf is only available for inner scope.
     // also you cant alter variable state inside lambda call, so creating the variable in outer
@@ -33,13 +31,17 @@ const readAndCacheRtfContent = async (filePath) => {
 
         /*
          To fix the problem above we are converting and then caching the information in a txt file
-         so to retrieve it later. Unnecessary coupling but it is just a workaround.
+         so to retrieve it later as a workaround.
         * */
-        const path = fileWriter.writeTxt(CACHED_RTF_LOCATION, textFromRtf);
-        console.log('Cached RTF content: ', path)
+        fileSystemCache.writeCache(textFromRtf)
     });
+
+    const text = await fileSystemCache.getCachedRtf();
+    await fileSystemCache.cleanCache();
+
+    return text;
 }
 
 const readHtml = async (fileData) => convert(fileData);
 
-module.exports = {readText, readPdf, readDocx, readAndCacheRtfContent, readHtml, CACHED_RTF_LOCATION};
+module.exports = {readText, readPdf, readDocx, readAndCacheRtfContent, readHtml};
