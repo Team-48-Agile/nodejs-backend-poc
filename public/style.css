@@ -23,6 +23,7 @@ body {
 p {
     font-family: 'Roboto', sans-serif;
     color: var(--black);
+    margin: 1.4em 0;
 }
 
 h1 {
@@ -138,13 +139,17 @@ footer ul{
 /*Converted text Page*/
 #textArea {
     margin: 1em;
-    height: 1000px;
+    min-height: 1000px;
     overflow-y: scroll;
     -moz-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.25);
     -webkit-box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.25);
     box-shadow: 0px 0px 10px 3px rgba(0,0,0,0.25);
     position: relative;
     transition: box-shadow 0.2s ease-in-out;
+}
+
+#textArea p {
+    margin: 0; 
 }
 
 #bionicText {
@@ -210,6 +215,10 @@ footer ul{
     font-size: medium;
 }
 
+.btn-primary {
+    background-color: var(--primary-blue);
+}
+
 #customisationArea input[type=number], select {
     width: 100%;
     padding: 5px;
@@ -228,6 +237,16 @@ footer ul{
 
 .copyright-notice {
     padding: 2em;
+}
+
+/*Footer Styles*/
+footer a {
+    color: var(--white);
+}
+
+footer .copyright {
+    text-align: right;
+    color: var(--light-grey);
 }
 
 
