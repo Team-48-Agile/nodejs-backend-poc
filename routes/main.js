@@ -53,7 +53,7 @@ module.exports = function (app) {
 
     app.post("/bionic-reader/convert/text-vide-file", (req, res) => {
         const form = new formidable.IncomingForm();
-        form.parse(req, function(err, fields, files){
+        form.parse(req, (err, fields, files) => {
             const filePath = files.fileUpload.filepath;
             const fileType = path.extname(files.fileUpload.originalFilename);
             const fileData = fs.readFileSync(filePath);
@@ -77,6 +77,8 @@ module.exports = function (app) {
         const filename = req.body['filename'];
         const fileType = req.body['fileType'];
 
-        await bionicReaderService.downloadFile(bionicText, filename, fileType);
+        bionicReaderService.downloadFile(bionicText, filename, fileType)
+            .then(() => console.log('File written succesfully'))
+            .catch((err) => console.log('Error: '+ err));
     });    
 }
