@@ -83,20 +83,24 @@ footer ul{
 /* Text Input CSS */
 
 /* https://www.w3schools.com/css/tryit.asp?filename=trycss_form_responsive */
-#textInput input[type=submit] {
+input[type=submit] {
     width: 150px;
     padding: 10px;
     background-color: var(--primary-blue);
-    color: white;
+    color: var(--white);
     border-radius: 5px;
     border: none;
     cursor: pointer;
 }
 
+input[type=submit]:hover {
+    opacity: 0.8;
+}
+
 #textInput input[type=number] {
     width: 100px;
     padding: 5px;
-    background-color: #f2f2f2;
+    background-color: #f5f5f5;
     margin-bottom: 15px;
 }
 
@@ -104,7 +108,7 @@ footer ul{
     width: 50%;
     height: 200px;
     padding: 10px;
-    background-color: #f2f2f2;
+    background-color: #f5f5f5;
     resize: vertical;
     margin-top: 15px;
     margin-bottom: 15px;
@@ -186,18 +190,21 @@ footer ul{
 /* Helped aligning the buttons on the same row => https://stackoverflow.com/questions/50615418/have-2-elements-share-same-line-with-flexbox */
 #customisationArea #btnArea {
     text-align: center;
-    padding: 10px;
 }
 
 #customisationArea #btnArea .btn {
-    display:inline-block;
-    padding: 10px;
+    width: 100%;
 }
 
-#customisationArea #btnArea #focusModeBtn {
+#focusModeBtn {
     background-color: var(--green-highlight);
     color: var(--black);
+    border: none;
     position: relative;
+}
+
+#focusModeBtn:hover {
+    opacity: 0.8;
 }
 
 #customisationArea #btnArea .btn button {
