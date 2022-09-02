@@ -45,16 +45,16 @@
                 <div id="btnArea">
                     <!--<div class="btn">
                         <a href="/">Back</a>
-                    </div>-->
-                    <!--<div class="btn">-->
-                        <button class="btn" id="focusModeBtn" onclick="focusMode()">Focus Mode</button>
-                    <!--</div>-->
-                    <!--<div class="btn">
+                    </div>
+                    <div class="btn">
+                        <button id="focusModeBtn" onclick="focusMode()">Focus Mode</button>
+                    </div>
+                    <!-- <div class="btn">
                         <button id="showBtn" onclick="showOriginalText()">Show Original Text</button>
                         <div id = "originalText" style="display:none;">
                             <p><%= text %></p>
                         </div>
-                    </div>-->
+                    </div> -->
                 </div>
 
                 <form>
@@ -130,8 +130,7 @@
                 
                 <form action = "/download" method="POST">
 
-                    <!-- <p><%= textWithBionic %></p> -->
-                    <textarea id="bionicText" name="bionicText"><%= textWithBionic %></textarea>
+                    <textarea hidden id="bionicText" name="bionicText"><%= textWithBionic %></textarea>
 
                     <label for="filename">Filename:</label>
                     <input type="text" id="filename" name="filename" value="converted_text"><br>
@@ -168,19 +167,19 @@
         // hiding and showing with button click https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp 
         // initially hiding div https://stackoverflow.com/questions/16083647/hide-text-within-html
         // changing button text on click https://stackoverflow.com/questions/10671174/changing-button-text-onclick
-        function showOriginalText(){
-            var originalText = document.getElementById("originalText");
-            var showBtn = document.getElementById("showBtn");
+        // function showOriginalText(){
+        //     var originalText = document.getElementById("originalText");
+        //     var showBtn = document.getElementById("showBtn");
 
-            if (originalText.style.display === "none"){
-                originalText.style.display = "block";
-                showBtn.innerHTML = "Hide Original Text";
-            }
-            else{
-                originalText.style.display = "none";
-                showBtn.innerHTML = "Show Original Text";
-            }
-        }
+        //     if (originalText.style.display === "none"){
+        //         originalText.style.display = "block";
+        //         showBtn.innerHTML = "Hide Original Text";
+        //     }
+        //     else{
+        //         originalText.style.display = "none";
+        //         showBtn.innerHTML = "Show Original Text";
+        //     }
+        // }
 
         // a simple test implementation of focus mode
         // works by toggling a large box-shadow over all other elements
