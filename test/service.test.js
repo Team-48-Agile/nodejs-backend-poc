@@ -65,7 +65,7 @@ describe('When converting text from file input', () => {
         expect(actual.fixation).to.be.equal(expected.fixation)
     });
 
-    it.skip('and file is of type RTF', async () => { //TODO: Remove Skip
+    it.skip('and file is of type RTF', async () => {
         let fileData = fs.readFileSync('test_files/test-small-text.rtf');
         let fileType = '.rtf';
         let filePath = 'test_files/test-small-text.rtf';
@@ -74,7 +74,7 @@ describe('When converting text from file input', () => {
 
         const actual = await service.convertFile(fileData, fileType, filePath, customizationParams);
 
-        expect(actual.text).to.containIgnoreSpaces(expected.text)
+        expect(actual.text).to.containIgnoreSpaces("lorem ipsum dolor sit amet")
         expect(actual.textWithBionic).to.containIgnoreSpaces(expected.textWithBionic)
         expect(actual.fixation).to.be.equal(expected.fixation)
     });

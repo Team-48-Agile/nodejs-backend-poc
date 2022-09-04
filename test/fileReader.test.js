@@ -6,12 +6,12 @@ const path = require( 'path' );
 const fileReader = require('../adapter/fileReader')
 
 describe('fileReader.readRtf()', () => { //TODO: Remove Skip
-    it.skip('should receive file path and return text as string', async () => {
+    it('should receive file path and return text as string', async () => {
 
         let filePath = path.join('test_files', 'test-small-text.rtf' );
-        let expected = 'lorem ipsum dolor sit amet'
+        let expected = 'lorem ipsum dolor sit ame\n'
 
-        const actual = await fileReader.readRtf(filePath);
+        const actual = await fileReader.readAndCacheRtfContent(filePath);
 
         expect(actual).to.equal(expected);
     });
