@@ -27,10 +27,12 @@
     
     <main role="main" class="container">
 
-        <a class="edit-link" href="/">&laquo; Edit Text</a>
+        <p class="py-1">
+            <a class="edit-link" href="/">&laquo; Edit Text</a>
+        </p>
 
         <div class="row">
-        <!-- <div class = "grid-container-customise"> -->
+        
             <div class="col-lg-8">
                 <div id="textArea">
                     <!-- Note the use of '%-' instead of '%=' here.
@@ -42,15 +44,22 @@
 
             <div id="customisationArea" class="col-lg-4">
 
-                <div id="btnArea" class="pb-3">
+                <button id="closeBtn" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#customisationArea">
+                    Close
+                </button>
+
+                <div id="navBtnArea" class="btnArea pb-3">
+                    
                     <div class="row">
-                    <div class="col">
-                        <a href="/" class="btn btn-primary">Back</a>
+                        <div class="col">
+                            <a href="/" class="btn btn-primary">Back</a>
+                        </div>
+
+                        <div class="col">
+                            <button id="focusModeBtn" class="btn" onclick="focusMode()">Focus Mode</button>
+                        </div>
                     </div>
-                    <div class="col">
-                        <button id="focusModeBtn" class="btn" onclick="focusMode()">Focus Mode</button>
-                    </div>
-                </div>
+
                     <!-- <div class="btn">
                         <button id="showBtn" onclick="showOriginalText()">Show Original Text</button>
                         <div id = "originalText" style="display:none;">
@@ -146,16 +155,28 @@
                         <option value="html">.html</option>
                     </select><br>
 
-                    <div id="btnArea">
-                        
+                    <div class="btnArea">
                         <input type="submit" name="submit" value="Download">
-                        
                     </div>
                 </form>       
             </div>
 
-            </div><!-- grid-container-customise -->
         </div><!-- row -->
+
+        <div id="mobileNav" class="btnArea">
+            <div class="row">
+                <div class="col">
+                    <button id="customizeBtn" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#customisationArea">
+                      Customize
+                    </button>
+                </div>
+                <div class="col">
+                    <div class="col">
+                        <button id="focusModeBtn" class="btn" onclick="focusMode()">Focus Mode</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <p class="copyright-notice">By uploading a file or converting text you confirm that you have the necessary permission of the copyright holder. Converted text is for your own use and not for distribution.</p>
 
@@ -384,7 +405,34 @@
             for(var i = 0; i < boldTags.length; i++){
                 boldTags[i].style.fontWeight = input;
             }
-        }        
+        }     
+
+        // Mobile Navigation 
+        // https://css-tricks.com/working-with-javascript-media-queries/
+        const mediaQuery = window.matchMedia('(max-width: 990px)')
+ 
+        function customizationNavToggle(e) {
+          var customisationArea = document.getElementById('customisationArea');
+          var header = document.getElementById("header");
+          // Check if the media query is true
+          if (e.matches) {
+            customisationArea.classList.add("offcanvas")
+            customisationArea.classList.add("offcanvas-end")
+            header.style.display = "none";
+          }
+          else {
+            customisationArea.classList.remove("offcanvas")
+            customisationArea.classList.remove("offcanvas-end")
+            header.style.display = "block";
+          }
+        }
+         
+        // Register event listener
+        mediaQuery.addListener(customizationNavToggle);
+
+        // Initial check
+        customizationNavToggle(mediaQuery);
+
     </script>
 
 </body>

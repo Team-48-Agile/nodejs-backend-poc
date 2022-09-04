@@ -18,6 +18,7 @@
 
 body {
     height: 100%;
+    overflow-x: hidden;
 }
 
 p {
@@ -53,7 +54,6 @@ header {
 
 a:hover {
     opacity: 0.8;
-    color: var(--white);
 }
 
 
@@ -185,14 +185,16 @@ input[type=submit]:hover {
     background: var(--grey);
     border-radius: 4px;
     height: 100%;
+    flex-basis: auto;
+    overflow-y: scroll;
 }
 
 /* Helped aligning the buttons on the same row => https://stackoverflow.com/questions/50615418/have-2-elements-share-same-line-with-flexbox */
-#customisationArea #btnArea {
+#customisationArea .btnArea {
     text-align: center;
 }
 
-#customisationArea #btnArea .btn {
+#customisationArea .btnArea .btn {
     width: 100%;
 }
 
@@ -207,7 +209,7 @@ input[type=submit]:hover {
     opacity: 0.8;
 }
 
-#customisationArea #btnArea .btn button {
+#customisationArea .btnArea .btn button {
     width: 150px;
     padding: 10px;
     background-color: var(--primary-blue);
@@ -218,7 +220,7 @@ input[type=submit]:hover {
     font-size: medium;
 }
 
-#customisationArea #btnArea .btn a {
+#customisationArea .btnArea .btn a {
     width: 150px;
     padding: 10px;
     background-color: var(--primary-blue);
@@ -272,4 +274,43 @@ footer .copyright {
 /*About Page*/
 #bionicExample {
     background-color: var(--light-grey);
+}
+
+/*Mobile Nav*/
+#mobileNav {
+    display: none;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    background: var(--light-grey);
+    padding: 2em;
+}
+
+#mobileNav .btn {
+    width: 100%;
+    padding: 1em; 
+}
+
+#closeBtn {
+    display: none;
+}
+
+@media (max-width: 990px) {
+
+  #navBtnArea {
+    display: none;
+  }
+  #customizationArea {
+    flex-basis: 100%;
+    overflow-y: scroll;
+  }
+
+  #mobileNav {
+    display: initial;
+    position: fixed;
+    bottom: 0;
+  }
+  #closeBtn {
+    display: initial;
+  }
 }
