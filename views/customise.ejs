@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">    
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/bootstrap/css/bootstrap.min.css">
     <!-- CUSTOM STYLES -->
     <link rel="stylesheet" type="text/css" href="/style.css">
 
@@ -27,10 +27,12 @@
     
     <main role="main" class="container">
 
-        <a class="edit-link" href="/">&laquo; Edit Text</a>
+        <p class="py-1">
+            <a class="edit-link" href="/">&laquo; Edit Text</a>
+        </p>
 
         <div class="row">
-        <!-- <div class = "grid-container-customise"> -->
+        
             <div class="col-lg-8">
                 <div id="textArea">
                     <!-- Note the use of '%-' instead of '%=' here.
@@ -42,13 +44,22 @@
 
             <div id="customisationArea" class="col-lg-4">
 
-                <div id="btnArea">
-                    <div class="btn">
-                        <a href="/">Back</a>
+                <button id="closeBtn" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#customisationArea">
+                    Close
+                </button>
+
+                <div id="navBtnArea" class="btnArea pb-3">
+                    
+                    <div class="row">
+                        <div class="col">
+                            <a href="/" class="btn btn-primary">Back</a>
+                        </div>
+
+                        <div class="col">
+                            <button id="focusModeBtn" class="btn" onclick="focusMode()">Focus Mode</button>
+                        </div>
                     </div>
-                    <div class="btn">
-                        <button id="focusModeBtn" onclick="focusMode()">Focus Mode</button>
-                    </div>
+
                     <!-- <div class="btn">
                         <button id="showBtn" onclick="showOriginalText()">Show Original Text</button>
                         <div id = "originalText" style="display:none;">
@@ -63,14 +74,14 @@
 
                     <!-- (Note: An integer value between 1 and 5. A lower fixation means more letters in a word are highlighted.) -->
                     <!--<label for="fixation">Fixation: <span id="fixationValue"></span></label>
-                    <input type="range" id="fixation" name="fixation" min="1" max="5" value=<%= fixation %>><br>-->
+                    <input type="range" class="form-range" id="fixation" name="fixation" min="1" max="5" value=<%= fixation %>><br>-->
 
                     <!-- (Note: An integer value between 10 and 50 in steps of ten. A lower saccade means more words are highlighted.) -->
-                    <label for="saccade">Saccade: <span id="saccadeValue"></span></label>
-                    <input type="range" id="saccade" name="saccade" min="10" max="50" step="10" value="10"><br>
+                    <label for="saccade" class="form-label">Saccade: <span id="saccadeValue"></span></label>
+                    <input type="range" class="form-range" id="saccade" name="saccade" min="10" max="50" step="10" value="10"><br>
 
-                    <label for="font">Font:</label>
-                    <select id="font" name="font">
+                    <label for="font" class="form-label">Font:</label>
+                    <select id="font" class="form-select" name="font">
                         <option value="Arial" selected>Arial</option>
                         <option value="Verdana">Verdana</option>
                         <option value="Helvetica">Helvetica</option>
@@ -83,11 +94,11 @@
                         <option value="Brush Script MT">Brush Script MT</option>
                     </select><br>
 
-                    <label for="fontSize">Font Size: <span id="fontSizeValue"></span></label>
-                    <input type="range" id="fontSize" name="fontSize" min="10" max="50" step="1" value="16"><br>
+                    <label for="fontSize" class="form-label">Font Size: <span id="fontSizeValue"></span></label>
+                    <input type="range" class="form-range" id="fontSize" name="fontSize" min="10" max="50" step="1" value="16"><br>
 
                     <!-- <label for="textColour">Text Colour:</label>
-                    <select id="textColour" name="textColour">
+                    <select id="textColour" class="form-select" name="textColour">
                         <option value="black" selected>Black</option>
                         <option value="white">White</option>
                         <option value="red">Red</option>
@@ -96,7 +107,7 @@
                     </select><br>
 
                     <label for="backgroundColour">Background Colour:</label>
-                    <select id="backgroundColour" name="backgroundColour">
+                    <select id="backgroundColour" class="form-select" name="backgroundColour">
                         <option value="black">Black</option>
                         <option value="white" selected>White</option>
                         <option value="red">Red</option>
@@ -106,8 +117,8 @@
 
                     -->
 
-                    <label for="colourScheme">Colour Scheme:</label>
-                    <select id="colourScheme" name="colourScheme">
+                    <label for="colourScheme" class="form-label">Colour Scheme:</label>
+                    <select id="colourScheme" class="form-select" name="colourScheme">
                         <option value="standard" selected>Standard</option>
                         <option value="sepia">Sepia</option>
                         <option value="rose">Rose</option>
@@ -115,28 +126,28 @@
                         <option value="dark">Dark</option>
                     </select><br>
 
-                    <label for="letterSpacing">Letter Spacing: <span id="letterSpacingValue"></span></label>
-                    <input type="range" id="letterSpacing" name="letterSpacing" min="-1" max="2" step="0.2" value="0"><br>
+                    <label for="letterSpacing" class="form-label">Letter Spacing: <span id="letterSpacingValue"></span></label>
+                    <input type="range" class="form-range" id="letterSpacing" name="letterSpacing" min="-1" max="2" step="0.2" value="0"><br>
 
-                    <label for="wordSpacing">Word Spacing: <span id="wordSpacingValue"></span></label>
-                    <input type="range" id="wordSpacing" name="wordSpacing" min="-5" max="10" step="0.5" value="0"><br>
+                    <label for="wordSpacing" class="form-label">Word Spacing: <span id="wordSpacingValue"></span></label>
+                    <input type="range" class="form-range" id="wordSpacing" name="wordSpacing" min="-5" max="10" step="0.5" value="0"><br>
 
-                    <label for="lineSpacing">Line Spacing: <span id="lineSpacingValue"></span></label>
-                    <input type="range" id="lineSpacing" name="lineSpacing" min="1" max="3" step="0.2" value="1"><br>
+                    <label for="lineSpacing" class="form-label">Line Spacing: <span id="lineSpacingValue"></span></label>
+                    <input type="range" class="form-range" id="lineSpacing" name="lineSpacing" min="1" max="3" step="0.2" value="1"><br>
 
-                    <label for="fontWeight">Font Weight: <span id="fontWeightValue"></span></label>
-                    <input type="range" id="fontWeight" name="fontWeight" min="100" max="900" step="100" value="600"><br>
+                    <label for="fontWeight" class="form-label">Font Weight: <span id="fontWeightValue"></span></label>
+                    <input type="range" class="form-range" id="fontWeight" name="fontWeight" min="100" max="900" step="100" value="600"><br>
                 </form>
                 
                 <form action = "/download" method="POST">
 
                     <textarea hidden id="bionicText" name="bionicText"><%= textWithBionic %></textarea>
 
-                    <label for="filename">Filename:</label>
-                    <input type="text" id="filename" name="filename" value="converted_text"><br>
+                    <label for="filename" class="form-label">Filename:</label>
+                    <input type="text" class="form-text" id="filename" name="filename" value="converted_text"><br>
 
-                    <label for="fileType">File Type:</label>
-                    <select id="fileType" name="fileType">
+                    <label for="fileType" class="form-label">File Type:</label>
+                    <select id="fileType" class="form-select" name="fileType">
                         <option value="txt" selected>.txt</option>
                         <option value="pdf">.pdf</option>
                         <option value="docx">.docx</option>
@@ -144,16 +155,28 @@
                         <option value="html">.html</option>
                     </select><br>
 
-                    <div id="btnArea">
-                        <div class="btn">
-                            <input type="submit" name="submit" value="Downloads">
-                        </div>
+                    <div class="btnArea">
+                        <input type="submit" name="submit" value="Download">
                     </div>
                 </form>       
             </div>
 
-            </div><!-- grid-container-customise -->
         </div><!-- row -->
+
+        <div id="mobileNav" class="btnArea">
+            <div class="row">
+                <div class="col">
+                    <button id="customizeBtn" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#customisationArea">
+                      Customize
+                    </button>
+                </div>
+                <div class="col">
+                    <div class="col">
+                        <button id="focusModeBtn" class="btn" onclick="focusMode()">Focus Mode</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <p class="copyright-notice">By uploading a file or converting text you confirm that you have the necessary permission of the copyright holder. Converted text is for your own use and not for distribution.</p>
 
@@ -382,7 +405,34 @@
             for(var i = 0; i < boldTags.length; i++){
                 boldTags[i].style.fontWeight = input;
             }
-        }        
+        }     
+
+        // Mobile Navigation 
+        // https://css-tricks.com/working-with-javascript-media-queries/
+        const mediaQuery = window.matchMedia('(max-width: 990px)')
+ 
+        function customizationNavToggle(e) {
+          var customisationArea = document.getElementById('customisationArea');
+          var header = document.getElementById("header");
+          // Check if the media query is true
+          if (e.matches) {
+            customisationArea.classList.add("offcanvas")
+            customisationArea.classList.add("offcanvas-end")
+            header.style.display = "none";
+          }
+          else {
+            customisationArea.classList.remove("offcanvas")
+            customisationArea.classList.remove("offcanvas-end")
+            header.style.display = "block";
+          }
+        }
+         
+        // Register event listener
+        mediaQuery.addListener(customizationNavToggle);
+
+        // Initial check
+        customizationNavToggle(mediaQuery);
+
     </script>
 
 </body>

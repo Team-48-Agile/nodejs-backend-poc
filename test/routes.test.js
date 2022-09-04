@@ -21,14 +21,15 @@ describe(('GET /healthcheck'), () => {
     });
 });
 
-describe('GET /bionic-reader/convert/text-vide', () => {
+describe('POST /bionic-reader/convert/text-vide', () => {
     const endpoint = '/bionic-reader/convert/text-vide';
     const convertedText = "**lo**rem **ip**sum";
 
     test("should parse correctly query params and return converted text", done => {
         request(app)
-            .get(endpoint)
-            .query({ text: 'lorem ipsum', sep: '**', fixation: 5, saccade: 'none' })
+            .post(endpoint)
+            .type('form')
+            .send({ text: 'lorem ipsum', sep: '**', fixation: 5, saccade: 'none' })
             .expect("Content-Type", "text/html; charset=utf-8")
             .expect((res) => {
                 expect(res.text).to.contain(convertedText);
@@ -44,8 +45,9 @@ describe('GET /bionic-reader/convert/text-vide', () => {
         convertToBionic.mockResolvedValue(query.text, query.sep, query.fixation);
 
         request(app)
-            .get(endpoint)
-            .query({ text: 'lorem ipsum', sep: '**', fixation: 5, saccade: 'none' })
+            .post(endpoint)
+            .type('form')
+            .send({ text: 'lorem ipsum', sep: '**', fixation: 5, saccade: 'none' })
             .expect("Content-Type", "text/html; charset=utf-8")
             .expect((res) => {
                 // expect(convertToBionic).should.have.been.calledOnce(query.text, query.sep, query.fixation);
@@ -55,8 +57,9 @@ describe('GET /bionic-reader/convert/text-vide', () => {
 
     test("should render customise.ejs with original text, converted text, fixation point and saccade", done => {
         request(app)
-            .get(endpoint)
-            .query({ text: 'lorem ipsum', sep: '**', fixation: 5, saccade: 'none' })
+            .post(endpoint)
+            .type('form')
+            .send({ text: 'lorem ipsum', sep: '**', fixation: 5, saccade: 'none' })
             .expect("Content-Type", "text/html; charset=utf-8")
             .expect(200, done);
     });

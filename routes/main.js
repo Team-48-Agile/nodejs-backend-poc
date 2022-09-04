@@ -37,13 +37,13 @@ module.exports = function (app) {
             });
     });
 
-    app.get("/bionic-reader/convert/text-vide", (req, res) => {
-        const text = req.query['text'];
-        const sep = req.query['sep'];
-        const fixation = req.query['fixation'];
+    app.post("/bionic-reader/convert/text-vide", (req, res) => {
+        const text = req.body['text'];
+        const sep = req.body['sep'];
+        const fixation = req.body['fixation'];
 
         // Unused
-        const saccade = req.query['saccade'];
+        const saccade = req.body['saccade'];
 
         console.log("Text to be converted with text-vide: ", text, " with a fixation of: ", fixation, " and a saccade of: ", saccade);
 
